@@ -224,8 +224,12 @@ font-size:90%;
   color: red;
 }
 
-#upload_image_email {
-  padding-left: 20px;
+#upload_link_email {
   margin-left: 10px;
+}
+
+#upload_image_email {
+  padding-bottom: 15px;
+  padding-left: 20px;
   background: url(email.png) no-repeat;
 }
