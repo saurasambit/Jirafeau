@@ -140,7 +140,7 @@ location ~ /var-.* {
 ```
 
 You should also remove un-necessessary write access once the installation is done (ex: configuration file).
-An other obvious basic security is to let access users to the site by HTTPS.
+An other obvious basic security is to let access users to the site by HTTPS (make sure `web_root` in you `config.local.php` is set with https).
 
 ## Server side encryption
 
