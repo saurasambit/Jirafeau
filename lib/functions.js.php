@@ -710,3 +710,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
     // Search for all datetime fields and convert the time to local timezone
     convertAllDatetimeFields();
 });
+
+// Add copy event listeners
+function copyLinkToClipboard(link_id) {
+    var focus = document.activeElement;
+    var e = document.getElementById(link_id);
+
+    var tmp = document.createElement("textarea");
+    document.body.appendChild(tmp);
+    tmp.textContent = e.href;
+    tmp.focus();
+    tmp.setSelectionRange(0, tmp.value.length);
+    document.execCommand("copy");
+    document.body.removeChild(tmp);
+
+    focus.focus();
+}
+
+function addCopyListener(button_id, link_id) {
+    document.getElementById(button_id)
+            .addEventListener("click", function() {
+                copyLinkToClipboard(link_id);});
+}
