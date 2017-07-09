@@ -335,7 +335,7 @@ case 4:
         jirafeau_export_cfg($cfg);
         echo '<div class="message"><p>' .
              t('Jirafeau is now fully operational') . ':' .
-             '<br /><a href="' . $cfg['web_root'] . '">' .
+             '<br /><a href="./">' .
              $cfg['web_root'].'</a></p></div>';
     }
 break;

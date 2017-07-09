@@ -98,29 +98,25 @@ else {
 
     <div id="upload_finished_download_page">
     <p>
-          <?php echo t('Download page') ?>
+          <a id="upload_link" href=""><?php echo t('Download page') ?></a>
           <a id="upload_link_email" href=""><img id="upload_image_email"/></a>
     </p>
-    <p><a id="upload_link" href=""></a></p>
     </div>
 
     <?php if ($cfg['preview'] == true) {
     ?>
     <div id="upload_finished_preview">
-    <p><?php echo t('View link') ?>:</p>
-    <p><a id="preview_link" href=""></a></p>
+    <p><a id="preview_link" href=""><?php echo t('View link') ?></a></p>
     </div>
     <?php
 } ?>
 
     <div id="upload_direct_download">
-    <p><?php echo t('Direct download link') ?>:</p>
-    <p><a id="direct_link" href=""></a></p>
+    <p><a id="direct_link" href=""><?php echo t('Direct download link') ?></a></p>
     </div>
 
     <div id="upload_delete">
-    <p><?php echo t('Delete link') ?>:</p>
-    <p><a id="delete_link" href=""></a></p>
+    <p><a id="delete_link" href=""><?php echo t('Delete link') ?></a></p>
     </div>
 
     <div id="upload_validity">
@@ -236,7 +232,7 @@ else {
     onclick="
         document.getElementById('upload').style.display = 'none';
         document.getElementById('uploading').style.display = '';
-        upload ('<?php echo $cfg['web_root']; ?>', <?php echo jirafeau_get_max_upload_size_bytes(); ?>);
+        upload (<?php echo jirafeau_get_max_upload_size_bytes(); ?>);
     "/>
     </p>
         </table>
