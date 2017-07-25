@@ -531,8 +531,11 @@ function jirafeau_get_link($hash)
     }
 
     $c = file($link);
+
+    $path_to_file = VAR_FILES . s2p(trim($c[5])) . trim($c[5]);
+
     $out['file_name'] = trim($c[0]);
-    $out['mime_type'] = trim($c[1]);
+    $out['mime_type'] = trim(mime_content_type($path_to_file));
     $out['file_size'] = trim($c[2]);
     $out['key'] = trim($c[3], NL);
     $out['time'] = trim($c[4]);
