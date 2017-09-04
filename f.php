@@ -84,10 +84,32 @@ if (!file_exists(VAR_FILES . $p . $link['md5'])) {
 }
 
 if (!empty($delete_code) && $delete_code == $link['link_code']) {
-    jirafeau_delete_link($link_name);
     require(JIRAFEAU_ROOT.'lib/template/header.php');
-    echo '<div class="message"><p>'.t('File has been deleted.').
-     '</p></div>';
+    if (isset($_POST['do_delete'])) {
+        jirafeau_delete_link($link_name);
+        echo '<div class="message"><p>'.t('File has been deleted.').
+            '</p></div>';
+    } else { ?>
+        <div>
+        <form action="f.php" method="post" id="submit_delete_post" class="form login">
+        <input type="hidden" name="do_delete" value=1/>
+        <fieldset>
+             <legend> <?php echo t('Confirm deletion') ?> </legend>
+             <table>
+             <tr><td>
+             <?php echo t('You are about to delete') . ' "' . htmlspecialchars($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' ?>
+             </td></tr>
+             <tr><td>
+                <?php echo t('By using our services, you accept our'). ' <a href="tos.php">' . t('Terms of Service') . '</a>.' ?>
+             </td></tr>
+             <tr><td>
+                <input type="submit" id="submit_delete"  value="<?php echo t('Delete'); ?>"
+                onclick="document.getElementById('submit_delete_post').action='<?php echo 'f.php?h=' . $link_name . '&amp;d=' . $delete_code . "';"; ?>
+                document.getElementById('submit_delete').submit ();"/>
+             </td></tr>
+             </table>
+         </fieldset></form></div><?php
+    }
     require(JIRAFEAU_ROOT.'lib/template/footer.php');
     exit;
 }
