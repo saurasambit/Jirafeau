@@ -143,6 +143,14 @@ location ~ /var-.* {
 }
 ```
 
+If you are using lighttpd, you can deny access to ```var``` folder in your configuration:
+
+```
+$HTTP["url"] =~ "^/var-*" {
+         url.access-deny = ("")
+}
+```
+
 You should also remove un-necessessary write access once the installation is done (ex: configuration file).
 An other obvious basic security is to let access users to the site by HTTPS (make sure `web_root` in you `config.local.php` is set with https).
 
