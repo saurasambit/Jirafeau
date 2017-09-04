@@ -55,6 +55,10 @@ Jirafeau project won't evolve to a file manager and will focus to keep a very fe
 
 ## Installation
 
+This shows how to install Jirafeau by your own, it's quite simple but you can
+also use a [docker image](https://hub.docker.com/r/mojo42/jirafeau/) or build
+it yourself. Check [docker folder](docker/README.md) for more informations.
+
 System requirements:
 - PHP >= 5.6
 - Optional, but recommended: Git >= 2.7
