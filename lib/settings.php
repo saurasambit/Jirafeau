@@ -39,7 +39,6 @@ define('JIRAFEAU_VERSION', '3.2.1');
 define('VAR_FILES', $cfg['var_root'] . 'files/');
 define('VAR_LINKS', $cfg['var_root'] . 'links/');
 define('VAR_ASYNC', $cfg['var_root'] . 'async/');
-define('VAR_ALIAS', $cfg['var_root'] . 'alias/');
 
 // helping variable to build absolute link to
 // root of the domain without handling the URL scheme

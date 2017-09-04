@@ -46,13 +46,6 @@ if (!preg_match('/[0-9a-zA-Z_-]+$/', $link_name)) {
 
 $link = jirafeau_get_link($link_name);
 if (count($link) == 0) {
-    /* Try alias. */
-    $alias = jirafeau_get_alias(md5($link_name));
-    if (count($alias) > 0) {
-        $link = jirafeau_get_link($alias["destination"]);
-    }
-}
-if (count($link) == 0) {
     require(JIRAFEAU_ROOT.'lib/template/header.php');
     echo '<div class="error"><p>' . t('Sorry, the requested file is not found') .
     '</p></div>';
