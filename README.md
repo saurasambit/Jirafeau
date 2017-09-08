@@ -98,22 +98,14 @@ Installation steps:
 1. The "Terms of Service" text file changed
    * To reuse previous changes to the ToS, move the old ```/tos_text.php``` file to ```/lib/tos.local.txt``` and remove all HTML und PHP Tags, leaving a regular text file
 
-### From version 2.0.0 to 3.0.0
+### from version 2.0.0 to 3.3.0
 
-1. No special change to upgrade to 3.0.0
-
-### From version 3.0.0 to 3.1.0
-
-1. No special change to upgrade to 3.1.0
-
-### From version 3.1.0 to 3.2.0
-
-1. No special change to upgrade to 3.2.0
-
-### From version 3.2.0 to 3.2.1
-
-1. No special change to upgrade to 3.2.1
-
+There is nothing special to do to update from/to the following versions:
+- 2.0.0 -> 3.0.0
+- 3.0.0 -> 3.1.0
+- 3.1.0 -> 3.2.0
+- 3.2.0 -> 3.2.1
+- 3.2.1 -> 3.3.0
 
 ### Troubleshooting
 
@@ -410,3 +402,14 @@ The very first version of Jirafeau after the fork of Jyraphe.
 ## Version 3.2.1
 
 - fix download view after an upload
+
+## Version 3.3.0
+
+- Added Docker Support
+- Added a copy button next to links to copy URLs in clipboard
+- Now use a delete page to confirm file deletion (#136)
+- Fixed object ProgressEvent Error (#127)
+- Added configuration tips for web servers
+- More translations
+- Style fixes
+- Removed useless alias API support (some old toy)
