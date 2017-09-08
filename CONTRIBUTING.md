@@ -24,6 +24,7 @@ view only to show the most importants files and their role.
 ```
 .
 ├── admin.php : administration interface to manage links and files
+├── docker : folder containing some configuration files to run Jirafeau in docker
 ├── f.php : permits to download files or show the download page
 ├── index.php : provides a web interface to interact with API
 ├── script.php : API interface (all file actions happen here - upload, deletion, etc)
@@ -45,10 +46,10 @@ view only to show the most importants files and their role.
 └── var-xxxxxxx : the users folder containing all data (auto generated, not versionized)
     ├── async : chunks of uploaded files (not succressfull yet) 
     ├── files : all files that have been uploaded successfully
-        ├── [hashed file name] : the original file
-        ├── [hashed file name]_count : count many links to this file exist
+    │   ├── [hashed file name] : the original file
+    │   └── [hashed file name]_count : count many links to this file exist
     └── links : all links, including meta-informations, pointing to files
-        ├── [link] : the link file, includes which original file should be used and some meta data like creation date, expiration time
+        └── [link] : the link file, includes which original file should be used and some meta data like creation date, expiration time
 ```
 
 ## Translations
