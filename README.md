@@ -2,9 +2,9 @@
 
 Welcome to the official Jirafeau project, an [Open-Source software](https://en.wikipedia.org/wiki/Open-source_software).
 
-Jirafeau is a project permitting a "one-click-filesharing", which makes it possible to upload a file in a simple way and give an unique link to it.
+Jirafeau allows your to "one-click-filesharing". It makes possible to upload a file in a simple way and give an unique link to it.
 
-A demonstration of the latest version is available on [jirafeau.net](http://jirafeau.net/).
+A demonstration of the latest version is available on [jirafeau.net](https://jirafeau.net/).
 
 ![Screenshot1](http://i.imgur.com/TPjh48P.png)
 
@@ -25,7 +25,7 @@ Next Release [![Build Status Next Release](https://gitlab.com/mojo42/Jirafeau/ba
 - Shortened URLs using base 64 encoding
 - Maximal upload size configurable
 - NO database, only use basic PHP
-- Simple language support :gb: :fr: :de: :it: :nl: :ro: :sk: :hu: :cn: :gr: :ru: :es: :tk: :flag_tr:
+- Simple language support :gb: :fr: :de: :it: :nl: :ro: :sk: :hu: :cn: :gr: :ru: :es: :tk: :flag_tr: :flag_pt: :flag_br:
 - File level [Deduplication](http://en.wikipedia.org/wiki/Data_deduplication) for storage optimization (does store duplicate files only once, but generate multiple links)
 - Optional data encryption
 - Small administration interface
@@ -54,6 +54,10 @@ Jirafeau project won't evolve to a file manager and will focus to keep a very fe
 - [Admin Interface](http://i.imgur.com/nTdsVzn.png)
 
 ## Installation
+
+This shows how to install Jirafeau by your own, it's quite simple but you can
+also use a [docker image](https://hub.docker.com/r/mojo42/jirafeau/) or build
+it yourself. Check [docker folder](docker/README.md) for more informations.
 
 System requirements:
 - PHP >= 5.6
@@ -94,22 +98,14 @@ Installation steps:
 1. The "Terms of Service" text file changed
    * To reuse previous changes to the ToS, move the old ```/tos_text.php``` file to ```/lib/tos.local.txt``` and remove all HTML und PHP Tags, leaving a regular text file
 
-### From version 2.0.0 to 3.0.0
+### from version 2.0.0 to 3.3.0
 
-1. No special change to upgrade to 3.0.0
-
-### From version 3.0.0 to 3.1.0
-
-1. No special change to upgrade to 3.1.0
-
-### From version 3.1.0 to 3.2.0
-
-1. No special change to upgrade to 3.2.0
-
-### From version 3.2.0 to 3.2.1
-
-1. No special change to upgrade to 3.2.1
-
+There is nothing special to do to update from/to the following versions:
+- 2.0.0 -> 3.0.0
+- 3.0.0 -> 3.1.0
+- 3.1.0 -> 3.2.0
+- 3.2.0 -> 3.2.1
+- 3.2.1 -> 3.3.0
 
 ### Troubleshooting
 
@@ -139,8 +135,16 @@ location ~ /var-.* {
 }
 ```
 
+If you are using lighttpd, you can deny access to ```var``` folder in your configuration:
+
+```
+$HTTP["url"] =~ "^/var-*" {
+         url.access-deny = ("")
+}
+```
+
 You should also remove un-necessessary write access once the installation is done (ex: configuration file).
-An other obvious basic security is to let access users to the site by HTTPS.
+An other obvious basic security is to let access users to the site by HTTPS (make sure `web_root` in you `config.local.php` is set with https).
 
 ## Server side encryption
 
@@ -398,3 +402,14 @@ The very first version of Jirafeau after the fork of Jyraphe.
 ## Version 3.2.1
 
 - fix download view after an upload
+
+## Version 3.3.0
+
+- Added Docker Support
+- Added a copy button next to links to copy URLs in clipboard
+- Now use a delete page to confirm file deletion (#136)
+- Fixed object ProgressEvent Error (#127)
+- Added configuration tips for web servers
+- More translations
+- Style fixes
+- Removed useless alias API support (some old toy)

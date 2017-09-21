@@ -33,13 +33,12 @@ if (file_exists(JIRAFEAU_ROOT . 'lib/config.local.php')) {
 
 /* Jirafeau package */
 define('JIRAFEAU_PACKAGE', 'Jirafeau');
-define('JIRAFEAU_VERSION', '3.2.1');
+define('JIRAFEAU_VERSION', '3.3.0');
 
 /* Directories. */
 define('VAR_FILES', $cfg['var_root'] . 'files/');
 define('VAR_LINKS', $cfg['var_root'] . 'links/');
 define('VAR_ASYNC', $cfg['var_root'] . 'async/');
-define('VAR_ALIAS', $cfg['var_root'] . 'alias/');
 
 // helping variable to build absolute link to
 // root of the domain without handling the URL scheme

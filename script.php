@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET" && count($_GET) == 0) {
     <h2>Scripting interface</h2>
     <p>This interface permits to script your uploads and downloads.</p>
     <p>See <a href="https://gitlab.com/mojo42/Jirafeau/blob/master/script.php">source code</a> of this interface to get available calls :)</p>
-    <p>You may download a preconfigured <a href="<?php echo JIRAFEAU_ABSPREFIX . 'script.php?lang=bash'; ?>">Bash Script</a> to easily send to and get files from the API via command line.</p>
+    <p>You may download a preconfigured <a href="script.php?lang=bash">Bash Script</a> to easily send to and get files from the API via command line.</p>
     </div>
     <br />
     <?php
@@ -362,72 +362,6 @@ fi
         echo 'Error 12';
         exit;
     }
-}
-/* Create alias. */
-elseif (isset($_GET['alias_create'])) {
-    if (isset($_POST['upload_password'])){
-        if (!jirafeau_challenge_upload($cfg, get_ip_address($cfg), $_POST['upload_password'])) {
-            echo 'Error 14: Invalid password';
-            exit;
-        }
-    } else {
-        if (!jirafeau_challenge_upload($cfg, get_ip_address($cfg), null)) {
-            echo 'Error 13: No password nor allowed IP';
-            exit;
-        }
-    }
-
-    if (!isset($_POST['alias']) ||
-        !isset($_POST['destination']) ||
-        !isset($_POST['password'])) {
-        echo 'Error 15';
-        exit;
-    }
-
-    echo jirafeau_alias_create($_POST['alias'],
-                                $_POST['destination'],
-                                $_POST['password'],
-                                $ip);
-}
-/* Get alias. */
-elseif (isset($_GET['alias_get'])) {
-    if (!isset($_POST['alias'])) {
-        echo 'Error 16';
-        exit;
-    }
-
-    echo jirafeau_alias_get($_POST['alias']);
-}
-/* Update alias. */
-elseif (isset($_GET['alias_update'])) {
-    if (!isset($_POST['alias']) ||
-        !isset($_POST['destination']) ||
-        !isset($_POST['password'])) {
-        echo 'Error 17';
-        exit;
-    }
-
-    $new_password = '';
-    if (isset($_POST['new_password'])) {
-        $new_password = $_POST['new_password'];
-    }
-
-    echo jirafeau_alias_update($_POST['alias'],
-                                $_POST['destination'],
-                                $_POST['password'],
-                                $new_password,
-                                get_ip_address($cfg));
-}
-/* Delete alias. */
-elseif (isset($_GET['alias_delete'])) {
-    if (!isset($_POST['alias']) ||
-        !isset($_POST['password'])) {
-        echo 'Error 18';
-        exit;
-    }
-
-    echo jirafeau_alias_delete($_POST['alias'],
-                                $_POST['password']);
 }
 /* Initialize an asynchronous upload. */
 elseif (isset($_GET['init_async'])) {

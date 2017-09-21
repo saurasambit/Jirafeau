@@ -24,7 +24,7 @@ require(JIRAFEAU_ROOT . 'lib/functions.php');
 require(JIRAFEAU_ROOT . 'lib/lang.php');
 
 if (!isset($_GET['h']) || empty($_GET['h'])) {
-    header('Location: ' . $cfg['web_root']);
+    header('Location: ./');
     exit;
 }
 
@@ -45,13 +45,6 @@ if (!preg_match('/[0-9a-zA-Z_-]+$/', $link_name)) {
 }
 
 $link = jirafeau_get_link($link_name);
-if (count($link) == 0) {
-    /* Try alias. */
-    $alias = jirafeau_get_alias(md5($link_name));
-    if (count($alias) > 0) {
-        $link = jirafeau_get_link($alias["destination"]);
-    }
-}
 if (count($link) == 0) {
     require(JIRAFEAU_ROOT.'lib/template/header.php');
     echo '<div class="error"><p>' . t('Sorry, the requested file is not found') .
@@ -91,10 +84,32 @@ if (!file_exists(VAR_FILES . $p . $link['md5'])) {
 }
 
 if (!empty($delete_code) && $delete_code == $link['link_code']) {
-    jirafeau_delete_link($link_name);
     require(JIRAFEAU_ROOT.'lib/template/header.php');
-    echo '<div class="message"><p>'.t('File has been deleted.').
-     '</p></div>';
+    if (isset($_POST['do_delete'])) {
+        jirafeau_delete_link($link_name);
+        echo '<div class="message"><p>'.t('File has been deleted.').
+            '</p></div>';
+    } else { ?>
+        <div>
+        <form action="f.php" method="post" id="submit_delete_post" class="form login">
+        <input type="hidden" name="do_delete" value=1/>
+        <fieldset>
+             <legend> <?php echo t('Confirm deletion') ?> </legend>
+             <table>
+             <tr><td>
+             <?php echo t('You are about to delete') . ' "' . htmlspecialchars($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' ?>
+             </td></tr>
+             <tr><td>
+                <?php echo t('By using our services, you accept our'). ' <a href="tos.php">' . t('Terms of Service') . '</a>.' ?>
+             </td></tr>
+             <tr><td>
+                <input type="submit" id="submit_delete"  value="<?php echo t('Delete'); ?>"
+                onclick="document.getElementById('submit_delete_post').action='<?php echo 'f.php?h=' . $link_name . '&amp;d=' . $delete_code . "';"; ?>
+                document.getElementById('submit_delete').submit ();"/>
+             </td></tr>
+             </table>
+         </fieldset></form></div><?php
+    }
     require(JIRAFEAU_ROOT.'lib/template/footer.php');
     exit;
 }
@@ -123,10 +138,7 @@ if (!empty($link['key'])) {
     if (!isset($_POST['key'])) {
         require(JIRAFEAU_ROOT.'lib/template/header.php');
         echo '<div>' .
-             '<form action = "';
-        echo JIRAFEAU_ABSPREFIX . 'f.php';
-        echo '" ' .
-             'method="post" id="submit_post" class="form login">'; ?>
+             '<form action="f.php" method="post" id="submit_post" class="form login">'; ?>
              <input type = "hidden" name = "jirafeau" value = "<?php echo JIRAFEAU_VERSION ?>"/><?php
         echo '<fieldset>' .
              '<legend>' . t('Password protection') .
@@ -135,7 +147,7 @@ if (!empty($link['key'])) {
              '<input type = "password" name = "key" />' .
              '</td></tr>' .
              '<tr><td>' .
-             t('By using our services, you accept our'). ' <a href="' . JIRAFEAU_ABSPREFIX . 'tos.php' . '">' . t('Terms of Service') . '</a>.' .
+             t('By using our services, you accept our'). ' <a href="tos.php">' . t('Terms of Service') . '</a>.' .
              '</td></tr>';
 
         if ($link['onetime'] == 'O') {
@@ -144,7 +156,7 @@ if (!empty($link['key'])) {
                  '</td></tr>';
         } ?><tr><td><input type="submit" id = "submit_download"  value="<?php echo t('Download'); ?>"
         onclick="document.getElementById('submit_post').action='<?php
-        echo JIRAFEAU_ABSPREFIX . 'f.php?h=' . $link_name . '&amp;d=1';
+        echo 'f.php?h=' . $link_name . '&amp;d=1';
         if (!empty($crypt_key)) {
             echo '&amp;k=' . urlencode($crypt_key);
         } ?>';
@@ -152,7 +164,7 @@ if (!empty($link['key'])) {
         if ($cfg['preview'] && jirafeau_is_viewable($link['mime_type'])) {
             ?><input type="submit" id = "submit_preview"  value="<?php echo t('Preview'); ?>"
             onclick="document.getElementById('submit_post').action='<?php
-            echo JIRAFEAU_ABSPREFIX . 'f.php?h=' . $link_name . '&amp;p=1';
+            echo 'f.php?h=' . $link_name . '&amp;p=1';
             if (!empty($crypt_key)) {
                 echo '&amp;k=' . urlencode($crypt_key);
             } ?>';
@@ -179,17 +191,14 @@ if (!empty($link['key'])) {
 if (!$password_challenged && !$do_download && !$do_preview) {
     require(JIRAFEAU_ROOT.'lib/template/header.php');
     echo '<div>' .
-             '<form action="';
-    echo JIRAFEAU_ABSPREFIX . 'f.php';
-    echo '" ' .
-             'method="post" id="submit_post" class="form download">'; ?>
+             '<form action="f.php" method="post" id="submit_post" class="form download">'; ?>
              <input type = "hidden" name = "jirafeau" value = "<?php echo JIRAFEAU_VERSION ?>"/><?php
         echo '<fieldset><legend>' . htmlspecialchars($link['file_name']) . '</legend><table>' .
              '<tr><td>' .
              t('You are about to download') . ' "' . htmlspecialchars($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' .
              '</td></tr>' .
              '<tr><td>' .
-             t('By using our services, you accept our'). ' <a href="' . JIRAFEAU_ABSPREFIX . 'tos.php' . '">' . t('Terms of Service') . '</a>.' .
+             t('By using our services, you accept our'). ' <a href="tos.php">' . t('Terms of Service') . '</a>.' .
              '</td></tr>';
 
     if ($link['onetime'] == 'O') {
@@ -199,7 +208,7 @@ if (!$password_challenged && !$do_download && !$do_preview) {
     } ?>
         <tr><td><input type="submit" id = "submit_download"  value="<?php echo t('Download'); ?>"
         onclick="document.getElementById('submit_post').action='<?php
-        echo JIRAFEAU_ABSPREFIX . 'f.php?h=' . $link_name . '&amp;d=1';
+        echo 'f.php?h=' . $link_name . '&amp;d=1';
     if (!empty($crypt_key)) {
         echo '&amp;k=' . urlencode($crypt_key);
     } ?>';
@@ -208,7 +217,7 @@ if (!$password_challenged && !$do_download && !$do_preview) {
         if ($cfg['preview'] && jirafeau_is_viewable($link['mime_type'])) {
             ?><input type="submit" id = "submit_preview"  value="<?php echo t('Preview'); ?>"
             onclick="document.getElementById('submit_post').action='<?php
-        echo JIRAFEAU_ABSPREFIX . 'f.php?h=' . $link_name . '&amp;p=1';
+        echo 'f.php?h=' . $link_name . '&amp;p=1';
             if (!empty($crypt_key)) {
                 echo '&amp;k=' . urlencode($crypt_key);
             } ?>';

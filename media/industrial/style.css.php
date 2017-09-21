@@ -184,8 +184,12 @@ input:hover {
   color: red;
 }
 
+#upload_link_email {
+  margin-left: 10px;
+}
+
 #upload_image_email {
   padding-left: 20px;
-  margin-left: 10px;
+  padding-bottom: 15px;
   background: url(email.png) no-repeat;
 }

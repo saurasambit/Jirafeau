@@ -83,7 +83,7 @@ function jirafeau_check_var_dir($path)
                                '<br />' . $mkdir_str2);
     }
 
-    foreach (array('files', 'links', 'async', 'alias') as $subdir) {
+    foreach (array('files', 'links', 'async') as $subdir) {
         $subpath = $path.$subdir;
 
         if (!jirafeau_mkdir($subpath) || !jirafeau_is_writable($subpath)) {
@@ -335,7 +335,7 @@ case 4:
         jirafeau_export_cfg($cfg);
         echo '<div class="message"><p>' .
              t('Jirafeau is now fully operational') . ':' .
-             '<br /><a href="' . $cfg['web_root'] . '">' .
+             '<br /><a href="./">' .
              $cfg['web_root'].'</a></p></div>';
     }
 break;

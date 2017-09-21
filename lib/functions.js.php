@@ -113,7 +113,7 @@ function convertAllDatetimeFields() {
     }
 }
 
-function show_link (url, reference, delete_code, crypt_key, date)
+function show_link (reference, delete_code, crypt_key, date)
 {
     // Upload finished
     document.getElementById('uploading').style.display = 'none';
@@ -122,23 +122,20 @@ function show_link (url, reference, delete_code, crypt_key, date)
     document.title = 'Jirafeau - 100%';
 
     // Download page
-    var download_link = url + 'f.php?h=' + reference;
-    var download_link_href = url + 'f.php?h=' + reference;
+    var download_link_href = 'f.php?h=' + reference;
     if (crypt_key.length > 0)
     {
-        download_link += '&amp;k=' + crypt_key;
         download_link_href += '&k=' + crypt_key;
     }
     if (!!document.getElementById('upload_finished_download_page'))
     {
-        document.getElementById('upload_link').innerHTML = download_link;
         document.getElementById('upload_link').href = download_link_href;
     }
 
     // Email link
     var filename = document.getElementById('file_select').files[0].name;
     var b = encodeURIComponent("Download file \"" + filename + "\":") + "%0D";
-    b += encodeURIComponent(download_link_href) + "%0D";
+    b += encodeURIComponent("<?php echo $cfg['web_root']; ?>" + download_link_href) + "%0D";
     if (false == isEmpty(date))
     {
         b += "%0D" + encodeURIComponent("This file will be available until " + date.format('YYYY-MM-DD hh:mm (GMT O)')) + "%0D";
@@ -146,9 +143,7 @@ function show_link (url, reference, delete_code, crypt_key, date)
     }
 
     // Delete link
-    var delete_link = url + 'f.php?h=' + reference + '&amp;d=' + delete_code;
-    var delete_link_href = url + 'f.php?h=' + reference + '&d=' + delete_code;
-    document.getElementById('delete_link').innerHTML = delete_link;
+    var delete_link_href = 'f.php?h=' + reference + '&d=' + delete_code;
     document.getElementById('delete_link').href = delete_link_href;
 
     // Validity date
@@ -168,11 +163,9 @@ function show_link (url, reference, delete_code, crypt_key, date)
     if (!!document.getElementById('preview_link'))
     {
         document.getElementById('upload_finished_preview').style.display = 'none';
-        var preview_link = url + 'f.php?h=' + reference + '&amp;p=1';
-        var preview_link_href = url + 'f.php?h=' + reference + '&p=1';
+        var preview_link_href = 'f.php?h=' + reference + '&p=1';
         if (crypt_key.length > 0)
         {
-            preview_link += '&amp;k=' + crypt_key;
             preview_link_href += '&k=' + crypt_key;
         }
 
@@ -183,23 +176,18 @@ function show_link (url, reference, delete_code, crypt_key, date)
              type.indexOf("text") > -1 ||
              type.indexOf("video") > -1)
          {
-            document.getElementById('preview_link').innerHTML = preview_link;
             document.getElementById('preview_link').href = preview_link_href;
             document.getElementById('upload_finished_preview').style.display = '';
          }
     }
 
     // Direct download link
-    var direct_download_link = url + 'f.php?h=' + reference + '&amp;d=1';
-    var direct_download_link_href = url + 'f.php?h=' + reference + '&d=1';
+    var direct_download_link_href = 'f.php?h=' + reference + '&d=1';
     if (crypt_key.length > 0)
     {
-        direct_download_link += '&amp;k=' + crypt_key;
         direct_download_link_href += '&k=' + crypt_key;
     }
-    document.getElementById('direct_link').innerHTML = direct_download_link;
     document.getElementById('direct_link').href = direct_download_link_href;
-
 
     // Hide preview and direct download link if password is set
     if (document.getElementById('input_key').value.length > 0)
@@ -330,7 +318,7 @@ function add_time_string_to_date(d, time)
     return false;
 }
 
-function classic_upload (url, file, time, password, one_time, upload_password)
+function classic_upload (file, time, password, one_time, upload_password)
 {
     // Delay time estimation init as we can't have file size
     upload_time_estimation_init(0);
@@ -366,10 +354,10 @@ function classic_upload (url, file, time, password, one_time, upload_password)
                 expiryDate = localDatetime;
             }
 
-            show_link (url, res[0], res[1], res[2], expiryDate);
+            show_link (res[0], res[1], res[2], expiryDate);
         }
     }
-    req.open ("POST", url + 'script.php' , true);
+    req.open ("POST", 'script.php' , true);
 
     var form = new FormData();
     form.append ("file", file);
@@ -391,17 +379,15 @@ function check_html5_file_api ()
 }
 
 var async_global_transfered = 0;
-var async_global_url = '';
 var async_global_file;
 var async_global_ref = '';
 var async_global_max_size = 0;
 var async_global_time;
 var async_global_transfering = 0;
 
-function async_upload_start (url, max_size, file, time, password, one_time, upload_password)
+function async_upload_start (max_size, file, time, password, one_time, upload_password)
 {
     async_global_transfered = 0;
-    async_global_url = url;
     async_global_file = file;
     async_global_max_size = max_size;
     async_global_time = time;
@@ -427,7 +413,7 @@ function async_upload_start (url, max_size, file, time, password, one_time, uplo
             async_upload_push (code);
         }
     }
-    req.open ("POST", async_global_url + 'script.php?init_async' , true);
+    req.open ("POST", 'script.php?init_async' , true);
 
     var form = new FormData();
     form.append ("filename", async_global_file.name);
@@ -498,7 +484,7 @@ function async_upload_push (code)
             async_upload_push (code);
         }
     }
-    req.open ("POST", async_global_url + 'script.php?push_async' , true);
+    req.open ("POST", 'script.php?push_async' , true);
 
     var chunk_size = parseInt (async_global_max_size * 0.50);
     var start = async_global_transfered;
@@ -545,10 +531,10 @@ function async_upload_end (code)
               expiryDate = localDatetime;
             }
 
-            show_link (async_global_url, res[0], res[1], res[2], expiryDate);
+            show_link (res[0], res[1], res[2], expiryDate);
         }
     }
-    req.open ("POST", async_global_url + 'script.php?end_async' , true);
+    req.open ("POST", 'script.php?end_async' , true);
 
     var form = new FormData();
     form.append ("ref", async_global_ref);
@@ -556,12 +542,12 @@ function async_upload_end (code)
     req.send (form);
 }
 
-function upload (url, max_size)
+function upload (max_size)
 {
     if (check_html5_file_api ()
         && document.getElementById('file_select').files[0].size >= max_size)
     {
-        async_upload_start (url,
+        async_upload_start (
             max_size,
             document.getElementById('file_select').files[0],
             document.getElementById('select_time').value,
@@ -572,7 +558,7 @@ function upload (url, max_size)
     }
     else
     {
-        classic_upload (url,
+        classic_upload (
             document.getElementById('file_select').files[0],
             document.getElementById('select_time').value,
             document.getElementById('input_key').value,
@@ -724,3 +710,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
     // Search for all datetime fields and convert the time to local timezone
     convertAllDatetimeFields();
 });
+
+// Add copy event listeners
+function copyLinkToClipboard(link_id) {
+    var focus = document.activeElement;
+    var e = document.getElementById(link_id);
+
+    var tmp = document.createElement("textarea");
+    document.body.appendChild(tmp);
+    tmp.textContent = e.href;
+    tmp.focus();
+    tmp.setSelectionRange(0, tmp.value.length);
+    document.execCommand("copy");
+    document.body.removeChild(tmp);
+
+    focus.focus();
+}
+
+function addCopyListener(button_id, link_id) {
+    document.getElementById(button_id)
+            .addEventListener("click", function() {
+                copyLinkToClipboard(link_id);});
+}
