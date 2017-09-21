@@ -1,5 +1,10 @@
 # Jirafeau
 
+This repo exists purely to maintain this commit, which allows previewing of files uploaded via API https://github.com/SecretlyTaco/Jirafeau/commit/762a73c4096af93ef65726033e86ada353d8397d
+You can try a hosted version of this repo at https://memeimg.sockspls.com/
+
+---
+
 Welcome to the official Jirafeau project, an [Open-Source software](https://en.wikipedia.org/wiki/Open-source_software).
 
 Jirafeau allows your to "one-click-filesharing". It makes possible to upload a file in a simple way and give an unique link to it.
