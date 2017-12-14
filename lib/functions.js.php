@@ -607,17 +607,17 @@ function upload_time_estimation_speed_string()
     if (s <= 1000)
     {
         res = s.toString();
-        scale = "o/s";
+        scale = "Bit/s";
     }
     else if (s < 1000000)
     {
         res = Math.floor(s/100) / 10;
-        scale = "Ko/s";
+        scale = "KBit/s";
     }
     else
     {
         res = Math.floor(s/100000) / 10;
-        scale = "Mo/s";
+        scale = "Mbit/s";
     }
     if (res == 0)
         return '';
@@ -627,7 +627,14 @@ function upload_time_estimation_speed_string()
 function milliseconds_to_time_string (milliseconds)
 {
     function numberEnding (number) {
+      var currentLanguage = '<?php echo $cfg['lang']; ?>';
+
+      if(currentLanguage == 'de') {
+        return (number > 1) ? 'n' : '';
+      }
+      else {
         return (number > 1) ? 's' : '';
+      }
     }
 
     var temp = Math.floor(milliseconds / 1000);
