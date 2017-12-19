@@ -119,7 +119,7 @@ function show_link (reference, delete_code, crypt_key, date)
     document.getElementById('uploading').style.display = 'none';
     document.getElementById('upload').style.display = 'none';
     document.getElementById('upload_finished').style.display = '';
-    document.title = "<?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?> - 100%";
+    document.title = "100% - <?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?>";
 
     // Download page
     var download_link_href = 'f.php?h=' + reference;
@@ -203,7 +203,7 @@ function show_upload_progression (percentage, speed, time_left)
     document.getElementById('uploaded_percentage').innerHTML = percentage;
     document.getElementById('uploaded_speed').innerHTML = speed;
     document.getElementById('uploaded_time').innerHTML = time_left;
-    document.title = "<?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?> - " + percentage;
+    document.title = percentage + " - <?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?>";
 }
 
 function hide_upload_progression ()
