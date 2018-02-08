@@ -43,7 +43,7 @@ function t($string_id)
     if ($r === false) {
         $r = t_in($string_id, "en");
         if ($r === false) {
-            return "";
+            return "FIX ME: " . $string_id;
         }
     }
     return $r;

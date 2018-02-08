@@ -52,7 +52,7 @@ if (true === jirafeau_challenge_upload_ip($cfg['upload_ip'], get_ip_address($cfg
                 $_SESSION['user_upload_password'] = $_POST['upload_password'];
             } else {
                 $_SESSION['admin_auth'] = false;
-                jirafeau_fatal_error(t('Wrong password.'), $cfg);
+                jirafeau_fatal_error(t('BAD_PSW'), $cfg);
             }
         }
 
@@ -64,7 +64,7 @@ if (true === jirafeau_challenge_upload_ip($cfg['upload_ip'], get_ip_address($cfg
                 <table>
                 <tr>
                     <td class = "label"><label for = "enter_password">
-                    <?php echo t('Upload password') . ':'; ?></label>
+                    <?php echo t('UP_PSW') . ':'; ?></label>
                     </td>
                 </tr><tr>
                     <td class = "field"><input type = "password"
@@ -75,7 +75,7 @@ if (true === jirafeau_challenge_upload_ip($cfg['upload_ip'], get_ip_address($cfg
                 <tr class = "nav">
                     <td class = "nav next">
                     <input type = "submit" name = "key" value =
-                    "<?php echo t('Login'); ?>" />
+                    "<?php echo t('LOGIN'); ?>" />
                     </td>
                 </tr>
                 </table>
@@ -88,16 +88,16 @@ if (true === jirafeau_challenge_upload_ip($cfg['upload_ip'], get_ip_address($cfg
     }
 }
 else {
-    jirafeau_fatal_error(t('Access denied'), $cfg);
+    jirafeau_fatal_error(t('ACCESS_KO'), $cfg);
 }
 
 ?>
 <div id="upload_finished">
-    <p><?php echo t('File uploaded !') ?></p>
+    <p><?php echo t('FILE_UP') ?></p>
 
     <div id="upload_finished_download_page">
     <p>
-        <a id="upload_link" href=""><?php echo t('Download page') ?></a>
+        <a id="upload_link" href=""><?php echo t('DL_PAGE') ?></a>
         <a id="upload_link_email" href=""><img id="upload_image_email"/></a>
     </p><p>
         <code id=upload_link_text></code>
@@ -109,7 +109,7 @@ else {
     ?>
     <div id="upload_finished_preview">
     <p>
-        <a id="preview_link" href=""><?php echo t('View link') ?></a>
+        <a id="preview_link" href=""><?php echo t('VIEW_LINK') ?></a>
     </p><p>
         <code id=preview_link_text></code>
         <button id="preview_link_button">✂</button>
@@ -120,7 +120,7 @@ else {
 
     <div id="upload_direct_download">
     <p>
-        <a id="direct_link" href=""><?php echo t('Direct download link') ?></a>
+        <a id="direct_link" href=""><?php echo t('DIRECT_DL') ?></a>
     </p><p>
         <code id=direct_link_text></code>
         <button id="direct_link_button">✂</button>
@@ -129,7 +129,7 @@ else {
 
     <div id="upload_delete">
     <p>
-        <a id="delete_link" href=""><?php echo t('Delete link') ?></a>
+        <a id="delete_link" href=""><?php echo t('DELETE_LINK') ?></a>
     </p><p>
         <code id=delete_link_text></code>
         <button id="delete_link_button">✂</button>
@@ -137,14 +137,14 @@ else {
     </div>
 
     <div id="upload_validity">
-    <p><?php echo t('This file is valid until the following date'); ?>:</p>
+    <p><?php echo t('VALID_UNTIL'); ?>:</p>
     <p id="date"></p>
     </div>
 </div>
 
 <div id="uploading">
     <p>
-    <?php echo t('Uploading ...'); ?>
+    <?php echo t('UP'); ?>
     <div id="uploaded_percentage"></div>
     <div id="uploaded_speed"></div>
     <div id="uploaded_time"></div>
@@ -157,59 +157,59 @@ else {
 <div id="upload">
 <fieldset>
     <legend>
-    <?php echo t('Select a file'); ?>
+    <?php echo t('SEL_FILE'); ?>
     </legend>
     <p>
     <input type="file" id="file_select" size="30"
-    onchange="control_selected_file_size(<?php echo $cfg['maximal_upload_size'] ?>, '<?php echo t('File is too big') . ', ' . t('File size is limited to') . " " . $cfg['maximal_upload_size'] . " MB"; ?>')"/>
+    onchange="control_selected_file_size(<?php echo $cfg['maximal_upload_size'] ?>, '<?php echo t('2_BIG') . ', ' . t('FILE_LIM') . " " . $cfg['maximal_upload_size'] . " MB"; ?>')"/>
     </p>
 
     <div id="options">
         <table id="option_table">
         <tr>
-        <td><?php echo t('One time download'); ?>:</td>
+        <td><?php echo t('ONE_TIME_DL'); ?>:</td>
         <td><input type="checkbox" id="one_time_download" /></td>
         </tr>
         <tr>
-        <td><label for="input_key"><?php echo t('Password') . ':'; ?></label></td>
+        <td><label for="input_key"><?php echo t('PSW') . ':'; ?></label></td>
         <td><input type="text" name="key" id="input_key" /></td>
         </tr>
         <tr>
-        <td><label for="select_time"><?php echo t('Time limit') . ':'; ?></label></td>
+        <td><label for="select_time"><?php echo t('TIME_LIM') . ':'; ?></label></td>
         <td><select name="time" id="select_time">
         <?php
         $expirationTimeOptions = array(
           array(
             'value' => 'minute',
-            'label' => 'One minute'
+            'label' => '1_MIN'
           ),
           array(
             'value' => 'hour',
-            'label' => 'One hour'
+            'label' => '1_H'
           ),
           array(
             'value' => 'day',
-            'label' => 'One day'
+            'label' => '1_D'
           ),
           array(
             'value' => 'week',
-            'label' => 'One week'
+            'label' => '1_W'
           ),
           array(
             'value' => 'month',
-            'label' => 'One month'
+            'label' => '1_M'
           ),
           array(
             'value' => 'quarter',
-            'label' => 'One quarter'
+            'label' => '1_Q'
           ),
           array(
             'value' => 'year',
-            'label' => 'One year'
+            'label' => '1_Y'
           ),
           array(
             'value' => 'none',
-            'label' => 'None'
+            'label' => 'NONE'
           )
         );
         foreach ($expirationTimeOptions as $expirationTimeOption) {
@@ -225,7 +225,7 @@ else {
 
         <?php
         if ($cfg['maximal_upload_size'] > 0) {
-            echo '<p class="config">' . t('File size is limited to');
+            echo '<p class="config">' . t('FILE_LIM');
             echo " " . $cfg['maximal_upload_size'] . " MB</p>";
         }
         ?>
@@ -245,7 +245,7 @@ else {
 
     }
     ?>
-    <input type="submit" id="send" value="<?php echo t('Send'); ?>"
+    <input type="submit" id="send" value="<?php echo t('SEND'); ?>"
     onclick="
         document.getElementById('upload').style.display = 'none';
         document.getElementById('uploading').style.display = '';
@@ -260,7 +260,7 @@ else {
         ?>
     <form method="post" class="form logout">
         <input type = "hidden" name = "action" value = "logout"/>
-        <input type = "submit" value = "<?php echo t('Logout'); ?>" />
+        <input type = "submit" value = "<?php echo t('LOGOUT'); ?>" />
     </form>
     <?php
 

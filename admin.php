@@ -46,7 +46,7 @@ if (php_sapi_name() == "cli") {
   if (empty($cfg['admin_password']) && empty($cfg['admin_http_auth_user'])) {
       require(JIRAFEAU_ROOT . 'lib/template/header.php');
       echo '<div class="error"><p>'.
-           t('Sorry, the admin interface is not enabled.') .
+           t('NO_ADMIN') .
            '</p></div>';
       require(JIRAFEAU_ROOT.'lib/template/footer.php');
       exit;
@@ -66,7 +66,7 @@ if (php_sapi_name() == "cli") {
           $_SESSION['admin_auth'] = false;
           require(JIRAFEAU_ROOT . 'lib/template/header.php');
           echo '<div class="error"><p>'.
-               t('Wrong password.') . '</p></div>';
+               t('BAD_PSW') . '</p></div>';
           require(JIRAFEAU_ROOT.'lib/template/footer.php');
           exit;
       }
@@ -80,7 +80,7 @@ if (php_sapi_name() == "cli") {
           <table>
           <tr>
               <td class = "label"><label for = "enter_password">
-              <?php echo t('Administration password') . ':'; ?></label>
+              <?php echo t('ADMIN_PSW') . ':'; ?></label>
               </td>
               <td class = "field"><input type = "password"
               name = "admin_password" id = "admin_password"
@@ -91,7 +91,7 @@ if (php_sapi_name() == "cli") {
               <td></td>
               <td class = "nav next">
               <input type = "submit" name = "key" value =
-              "<?php echo t('Login'); ?>" />
+              "<?php echo t('LOGIN'); ?>" />
               </td>
           </tr>
           </table>
@@ -114,7 +114,7 @@ if (php_sapi_name() == "cli") {
       $_SESSION['admin_auth'] = false;
       require(JIRAFEAU_ROOT . 'lib/template/header.php');
       echo '<div class="error"><p>'.
-           t('Sorry, you are not authenticated on admin interface.') .
+           t('NO_ADMIN_AUTH') .
            '</p></div>';
       require(JIRAFEAU_ROOT.'lib/template/footer.php');
       exit;
@@ -129,21 +129,21 @@ if (php_sapi_name() == "cli") {
 
   /* Show admin interface if not downloading a file. */
   if (!(isset($_POST['action']) && strcmp($_POST['action'], 'download') == 0)) {
-      require(JIRAFEAU_ROOT . 'lib/template/header.php'); ?><h2><?php echo t('Admin interface'); ?></h2><?php
+      require(JIRAFEAU_ROOT . 'lib/template/header.php'); ?><h2><?php echo t('ADMIN_INTERFACE'); ?></h2><?php
           ?><h2>(version <?php echo JIRAFEAU_VERSION ?>)</h2><?php
 
           ?><div id = "admin">
-          <fieldset><legend><?php echo t('Actions'); ?></legend>
+          <fieldset><legend><?php echo t('ACTIONS'); ?></legend>
           <table>
           <form method="post">
           <tr>
               <input type = "hidden" name = "action" value = "clean"/>
               <td class = "info">
-                  <?php echo t('Clean expired files'); ?>
+                  <?php echo t('CLEAN_EXPIRED'); ?>
               </td>
               <td></td>
               <td>
-                  <input type = "submit" value = "<?php echo t('Clean'); ?>" />
+                  <input type = "submit" value = "<?php echo t('CLEAN'); ?>" />
               </td>
           </tr>
           </form>
@@ -151,11 +151,11 @@ if (php_sapi_name() == "cli") {
           <tr>
               <input type = "hidden" name = "action" value = "clean_async"/>
               <td class = "info">
-                  <?php echo t('Clean old unfinished transfers'); ?>
+                  <?php echo t('CLEAN_INCOMPLETE'); ?>
               </td>
               <td></td>
               <td>
-                  <input type = "submit" value = "<?php echo t('Clean'); ?>" />
+                  <input type = "submit" value = "<?php echo t('CLEAN'); ?>" />
               </td>
           </tr>
           </form>
@@ -163,11 +163,11 @@ if (php_sapi_name() == "cli") {
           <tr>
               <input type = "hidden" name = "action" value = "list"/>
               <td class = "info">
-                  <?php echo t('List all files'); ?>
+                  <?php echo t('LS_FILES'); ?>
               </td>
               <td></td>
               <td>
-                  <input type = "submit" value = "<?php echo t('List'); ?>" />
+                  <input type = "submit" value = "<?php echo t('LIST'); ?>" />
               </td>
           </tr>
           </form>
@@ -175,13 +175,13 @@ if (php_sapi_name() == "cli") {
           <tr>
               <input type = "hidden" name = "action" value = "search_by_name"/>
               <td class = "info">
-                  <?php echo t('Search files by name'); ?>
+                  <?php echo t('SEARCH_NAME'); ?>
               </td>
               <td>
                   <input type = "text" name = "name" id = "name"/>
               </td>
               <td>
-                  <input type = "submit" value = "<?php echo t('Search'); ?>" />
+                  <input type = "submit" value = "<?php echo t('SEARCH'); ?>" />
               </td>
           </tr>
           </form>
@@ -189,13 +189,13 @@ if (php_sapi_name() == "cli") {
           <tr>
               <input type = "hidden" name = "action" value = "search_by_file_hash"/>
               <td class = "info">
-                  <?php echo t('Search files by file hash'); ?>
+                  <?php echo t('SEARH_BY_HASH'); ?>
               </td>
               <td>
                   <input type = "text" name = "hash" id = "hash"/>
               </td>
               <td>
-                  <input type = "submit" value = "<?php echo t('Search'); ?>" />
+                  <input type = "submit" value = "<?php echo t('SEARCH'); ?>" />
               </td>
           </tr>
           </form>
@@ -203,20 +203,20 @@ if (php_sapi_name() == "cli") {
           <tr>
               <input type = "hidden" name = "action" value = "search_link"/>
               <td class = "info">
-                  <?php echo t('Search a specific link'); ?>
+                  <?php echo t('SEARCH'); ?>
               </td>
               <td>
                   <input type = "text" name = "link" id = "link"/>
               </td>
               <td>
-                  <input type = "submit" value = "<?php echo t('Search'); ?>" />
+                  <input type = "submit" value = "<?php echo t('SEARCH'); ?>" />
               </td>
           </tr>
           </form>
           </table>
           <form method="post">
               <input type = "hidden" name = "action" value = "logout" />
-              <input type = "submit" value = "<?php echo t('Logout'); ?>" />
+              <input type = "submit" value = "<?php echo t('LOGOUT'); ?>" />
           </form>
           </fieldset></div><?php
 
@@ -228,13 +228,13 @@ if (php_sapi_name() == "cli") {
           $total = jirafeau_admin_clean();
           echo '<div class="message">' . NL;
           echo '<p>';
-          echo t('Number of cleaned files') . ' : ' . $total;
+          echo t('CLEANED_FILES_CNT') . ' : ' . $total;
           echo '</p></div>';
       } elseif (strcmp($_POST['action'], 'clean_async') == 0) {
           $total = jirafeau_admin_clean_async();
           echo '<div class="message">' . NL;
           echo '<p>';
-          echo t('Number of cleaned files') . ' : ' . $total;
+          echo t('CLEANED_FILES_CNT') . ' : ' . $total;
           echo '</p></div>';
       } elseif (strcmp($_POST['action'], 'list') == 0) {
           jirafeau_admin_list("", "", "");
@@ -247,11 +247,11 @@ if (php_sapi_name() == "cli") {
       } elseif (strcmp($_POST['action'], 'delete_link') == 0) {
           jirafeau_delete_link($_POST['link']);
           echo '<div class="message">' . NL;
-          echo '<p>' . t('Link deleted') . '</p></div>';
+          echo '<p>' . t('LINK_DELETED') . '</p></div>';
       } elseif (strcmp($_POST['action'], 'delete_file') == 0) {
           $count = jirafeau_delete_file($_POST['md5']);
           echo '<div class="message">' . NL;
-          echo '<p>' . t('Deleted links') . ' : ' . $count . '</p></div>';
+          echo '<p>' . t('DELETED_LINKS') . ' : ' . $count . '</p></div>';
       } elseif (strcmp($_POST['action'], 'download') == 0) {
           $l = jirafeau_get_link($_POST['link']);
           if (!count($l)) {

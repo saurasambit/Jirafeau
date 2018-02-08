@@ -654,25 +654,25 @@ function milliseconds_to_time_string (milliseconds)
     var temp = Math.floor(milliseconds / 1000);
     var years = Math.floor(temp / 31536000);
     if (years) {
-        return years + ' ' + translate ('year') + numberEnding(years);
+        return years + ' ' + translate ('YEAR') + numberEnding(years);
     }
     var days = Math.floor((temp %= 31536000) / 86400);
     if (days) {
-        return days + ' ' + translate ('day') + numberEnding(days);
+        return days + ' ' + translate ('DAY') + numberEnding(days);
     }
     var hours = Math.floor((temp %= 86400) / 3600);
     if (hours) {
-        return hours + ' ' + translate ('hour') + numberEnding(hours);
+        return hours + ' ' + translate ('HOUR') + numberEnding(hours);
     }
     var minutes = Math.floor((temp %= 3600) / 60);
     if (minutes) {
-        return minutes + ' ' + translate ('minute') + numberEnding(minutes);
+        return minutes + ' ' + translate ('MINUTE') + numberEnding(minutes);
     }
     var seconds = temp % 60;
     if (seconds) {
-        return seconds + ' ' + translate ('second') + numberEnding(seconds);
+        return seconds + ' ' + translate ('SECOND') + numberEnding(seconds);
     }
-    return translate ('less than a second');
+    return translate ('LESS_1_SEC');
 }
 
 function upload_time_estimation_time()
