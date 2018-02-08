@@ -37,86 +37,68 @@ $languages_list = array('auto' => 'Automatic',
                          'tr'   => 'Türkçe',
                          'zh'   => '汉语');
 
-/* Translation */
-function t($text)
+function t($string_id)
 {
-    $cfg = $GLOBALS['cfg'];
-    $languages_list = $GLOBALS['languages_list'];
-
-    /* Detect user's langage if we are in automatic mode. */
-    if (strcmp($cfg['lang'], 'auto') == 0) {
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $l = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        } else {
-            $l = "en";
-        }
-    } else {
-        $l = $cfg['lang'];
-    }
-
-    /* Is the langage in the list ? */
-    $found = false;
-    foreach ($languages_list as $key => $v) {
-        if (strcmp($l, $key) == 0) {
-            $found = true;
+    $r = t_in($string_id, t_select_lang());
+    if ($r === false) {
+        $r = t_in($string_id, "en");
+        if ($r === false) {
+            return "";
         }
     }
-
-    /* Don't translate english. */
-    if (!($found && strcmp($l, "en"))) {
-        return $text;
-    }
-
-    /* Open translation file. */
-    $trans_j = file_get_contents(JIRAFEAU_ROOT . "lib/locales/$l.json");
-    if ($trans_j === false) {
-        return $text;
-    }
-
-    /* Decode JSON. */
-    $trans = json_decode($trans_j, true);
-    if ($trans === null) {
-        return $text;
-    }
-
-    /* Try to find translation. */
-    if (!array_key_exists($text, $trans)) {
-        return $text;
-    }
-
-    return $trans[$text];
+    return $r;
 }
 
-function json_lang_generator()
-{
+function t_select_lang() {
     $cfg = $GLOBALS['cfg'];
-    $languages_list = $GLOBALS['languages_list'];
-
-    /* Detect user's langage if we are in automatic mode. */
-    if (strcmp($cfg['lang'], 'auto') == 0) {
-        if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-            $l = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-        } else {
-            $l = "en";
-        }
+    if (strcmp($cfg['lang'], 'auto') != 0) {
+        return $cfg['lang'];
+    }
+    else if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+        return substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     } else {
-        $l = $cfg['lang'];
+        return "en";
     }
+}
 
-    /* Is the langage in the list ? */
-    $found = false;
-    foreach ($languages_list as $key => $v) {
-        if (strcmp($l, $key) == 0) {
-            $found = true;
-        }
+function t_in($string_id, $lang) {
+    $trans = t_get_json($lang);
+    if ($trans === false) {
+        return false;
     }
-
-    /* Don't translate english. */
-    if (!($found && strcmp($l, "en"))) {
-        return "{}";
+    if (!array_key_exists($string_id, $trans)) {
+        return false;
     }
+    return $trans[$string_id];
+}
 
-    /* Open translation file. */
-    $trans_j = file_get_contents(JIRAFEAU_ROOT . "lib/locales/$l.json");
-    return $trans_j;
+function t_get_raw_json($lang) {
+    $p = JIRAFEAU_ROOT . "lib/locales/$lang.json";
+    if (!file_exists($p)) {
+        return false;
+    }
+    $json = file_get_contents($p);
+    if ($json === false) {
+        return false;
+    }
+    return $json;
+}
+
+function t_get_json($lang) {
+    $raw_j = t_get_raw_json($lang);
+    $array = json_decode($raw_j, true);
+    if ($array === null) {
+        return false;
+    }
+    return $array;
+}
+
+function json_lang_generator($lang) {
+    $r = "";
+    if ($lang === null) {
+        $r = t_get_raw_json(t_select_lang());
+    } else {
+        $r = t_get_raw_json($lang);
+    }
+    return $r === false ? "{}" : $r;
 }

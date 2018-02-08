@@ -28,12 +28,21 @@ require(JIRAFEAU_ROOT . 'lib/lang.php');
 ?>
 var web_root = "<?php echo $cfg['web_root']; ?>";
 
-function translate (expr)
-{
-    var lang_array = <?php echo json_lang_generator() ?>;
-    if (lang_array.hasOwnProperty(expr))
-        return lang_array[expr];
-    return expr;
+var lang_array = <?php echo json_lang_generator(null); ?>;
+var lang_array_fallback = <?php echo json_lang_generator("en"); ?>;
+
+function translate (expr) {
+    if (lang_array.hasOwnProperty(expr)) {
+        var e = lang_array[expr];
+        if (!isEmpty(e))
+            return e;
+    }
+    if (lang_array_fallback.hasOwnProperty(expr)) {
+        var e = lang_array_fallback[expr];
+        if (!isEmpty(e))
+            return e;
+    }
+    return "FIXME: " + expr;
 }
 
 function isEmpty(str) {
