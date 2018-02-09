@@ -69,7 +69,6 @@
     "DATA_DIR_EXPLAINATION": "O diretório de dados é onde os seus arquivos e a informações sobre os arquivos serão armazenados. Deverá coloca-lo fora do seu servidor web ou pelo menos restringir o acesso a este diretório. Não esquecer a barra final!",
     "DATA_DIR": "Diretório de dados",
     "JI_HAZ_LANGAGES": "O Jirafeau é internacionalizado. Especifique um idioma ou escolha Automático (o idioma provido pelo navegador do utilizador).",
-    "DEF_LANGUAGE": "Escolha o idioma padrão",
     "NEXT_STEP": "Próximo passo",
     "ADMIN_INTERFACE_INFO": "Jirafeau possui um interface de administração (admin.php). Você definir uma senha para acessar a interface ou deixá-la vazia para desabilitar esta interface.",
     "NO_ADMIN": "Desculpe, a interface de administração está desabilitada.",

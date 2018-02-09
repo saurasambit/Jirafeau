@@ -67,7 +67,6 @@
     "DATA_DIR_EXPLAINATION": "W katalogu danych znajdują się pliki i informacje o przechowywanych plikach. Należy umieścić go poza witryną internetową lub przynajmniej ograniczyć dostęp do tego katalogu. Nie zapomnij o ukośniku!",
     "DATA_DIR": "Folder danych",
     "JI_HAZ_LANGAGES": "Jirafeau jest zinternacjonalizowany. Wybierz specyficzny język albo pozwól nam pomóc na podstawie domyślnego języka Twojej przeglądarki.",
-    "DEF_LANGUAGE": "Wybierz domyślny język",
     "NEXT_STEP": "Następny krok",
     "ADMIN_INTERFACE_INFO": "Jirafeau posiada interfejs administracyjny (przez admin.php). Możesz ustawić hasło dostępu do interfejsu lub pozostawić puste, aby wyłączyć interfejs.",
     "NO_ADMIN": "Przepraszamy, interfejs administracyjny nie jest dostępny.",

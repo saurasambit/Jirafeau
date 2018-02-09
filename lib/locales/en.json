@@ -72,7 +72,6 @@
     "DATA_DIR_EXPLAINATION": "The data directory is where your files and information about your files will be stored. You should put it outside your web site, or at least restrict the access to this directory. Do not forget the trailing slash!",
     "DATA_DIR": "Data directory",
     "JI_HAZ_LANGAGES": "Jirafeau is internationalised. Choose a specific langage or choose Automatic (langage is provided by user's browser).",
-    "DEF_LANGUAGE": "Choose the default language",
     "NEXT_STEP": "Next step",
     "ADMIN_INTERFACE_INFO": "Jirafeau has an administration interface (through admin.php). You can set a password to access the interface or leave it empty to disable the interface.",
     "NO_ADMIN": "Sorry, the admin interface is not enabled.",

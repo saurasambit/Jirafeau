@@ -72,7 +72,6 @@
     "DATA_DIR_EXPLAINATION": "Datamappen er der filer og informasjon om filene dine blir lagret. Du burde legge den utenfor din nettside, eller i det minste begrense tilgang til denne mappen. Ikke glem den etterfølgende skråstreken!",
     "DATA_DIR": "Datamappe",
     "JI_HAZ_LANGAGES": "Jirafeau lar deg velge språk eller bruke automatisk forvalg (språk innstilt i brukerens nettleser).",
-    "DEF_LANGUAGE": "Endre forvalgt språk",
     "NEXT_STEP": "Neste steg",
     "ADMIN_INTERFACE_INFO": "Jirafeau har et administrasjonsgrensesnitt (gjennom admin.php). Du kan sette et passord for tilgang til grensesnittet, eller la det stå tomt for å skru det av.",
     "NO_ADMIN": "Administrasjonsgrensesnittet er ikke påslått.",

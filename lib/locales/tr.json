@@ -69,7 +69,6 @@
     "DATA_DIR_EXPLAINATION": "Veri klasörü dosyalarınızın ve bunların bilgilerinin kaydedildiği yerdir. Bu klasörü web sayfanızın dışına koyabilir veya en azından bu klasöre verilen yetkiyi kısıtlayabilirsiniz. Bölü işareti kullanmayı unutmayınız!",
     "DATA_DIR": "Veri klasörü",
     "JI_HAZ_LANGAGES": "Jirafeau çoklu dil desteği vermektedir. Lütfen belirli bir dil seçiniz veya kullanıcının web tarayıcısının dilini algılayabilmesi için otomatiği seçiniz.",
-    "DEF_LANGUAGE": "Lütfen varsayılan dili seçiniz",
     "NEXT_STEP": "Sonraki adım",
     "ADMIN_INTERFACE_INFO": "Jirafeau, admin.php ile yönetim sayfası sunmaktadır. Yönetim sayfasını etkinleştirmek için bir parola belirleyiniz veya boş bırakarak yönetim sayfasını devre dışı bırakınız.",
     "NO_ADMIN": "Üzgünüz, yönetim sayfanız etkinleştirilmedi.",
