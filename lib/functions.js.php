@@ -641,14 +641,7 @@ function upload_time_estimation_speed_string()
 function milliseconds_to_time_string (milliseconds)
 {
     function numberEnding (number) {
-      var currentLanguage = '<?php echo $cfg['lang']; ?>';
-
-      if(currentLanguage == 'de') {
-        return (number > 1) ? 'n' : '';
-      }
-      else {
-        return (number > 1) ? 's' : '';
-      }
+        return (number > 1) ? translate ('PLURAL_ENDING') : '';
     }
 
     var temp = Math.floor(milliseconds / 1000);
