@@ -67,13 +67,13 @@ if (true === jirafeau_challenge_upload_ip($cfg['upload_ip'], get_ip_address($cfg
                     <td class = "label"><label for = "enter_password">
                     <?php echo t('Upload password') . ':'; ?></label>
                     </td>
+                </tr><tr>
                     <td class = "field"><input type = "password"
                     name = "upload_password" id = "upload_password"
                     size = "40" />
                     </td>
                 </tr>
                 <tr class = "nav">
-                    <td></td>
                     <td class = "nav next">
                     <input type = "submit" name = "key" value =
                     "<?php echo t('Login'); ?>" />
