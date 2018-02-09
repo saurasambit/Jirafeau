@@ -149,11 +149,6 @@ if (!is_writable(JIRAFEAU_CFG) && !@chmod(JIRAFEAU_CFG, '0666')) {
 if (isset($_POST['step']) && isset($_POST['next'])) {
     switch ($_POST['step']) {
     case 1:
-        $cfg['lang'] = $_POST['lang'];
-        jirafeau_export_cfg($cfg);
-        break;
-
-    case 2:
         if (strlen($_POST['admin_password'])) {
             $cfg['admin_password'] = hash('sha256', $_POST['admin_password']);
         } else {
@@ -162,13 +157,13 @@ if (isset($_POST['step']) && isset($_POST['next'])) {
         jirafeau_export_cfg($cfg);
         break;
 
-    case 3:
+    case 2:
         $cfg['web_root'] = jirafeau_add_ending_slash($_POST['web_root']);
         $cfg['var_root'] = jirafeau_add_ending_slash($_POST['var_root']);
         jirafeau_export_cfg($cfg);
         break;
 
-    case 4:
+    case 3:
         $cfg['web_root'] = jirafeau_add_ending_slash($_POST['web_root']);
         $cfg['var_root'] = jirafeau_add_ending_slash($_POST['var_root']);
         jirafeau_export_cfg($cfg);
@@ -189,48 +184,14 @@ switch ($current) {
 case 1:
 default:
     ?><h2><?php printf(t('JI_INSTALL') . ' - ' . t('STEP') .
-    ' %d ' . t('OUT_OF') . ' %d', 1, 4);
+    ' %d ' . t('OUT_OF') . ' %d', 1, 3);
     ?></h2> <div id = "install"> <form method="post"> <input type =
         "hidden" name = "jirafeau" value =
         "<?php echo JIRAFEAU_VERSION; ?>" /><input type = "hidden" name =
-        "step" value = "1" /><fieldset> <legend><?php echo t('Language');
-    ?></legend> <table> <tr> <td class = "info" colspan =
-        "2"><?php echo
-        t('Jirafeau is internationalised. Choose a specific langage or ' .
-         'choose Automatic (langage is provided by user\'s browser).');
-    ?></td> </tr> <tr> <td class = "label"><label for = "select_lang"
-       ><?php echo t('DEF_LANGUAGE') . ':';
-    ?></label></td>
-        <td class = "field">
-        <select name = "lang" id = "select_lang">
-        <?php foreach ($languages_list as $key => $item) {
-        echo '<option value="'.$key.'"'.($key ==
-                      $cfg['lang'] ? ' selected="selected"'
-                      : '').'>'.$item.'</option>'.NL;
-    }
-    ?></select>
-        </td>
-        </tr>
-        <tr class = "nav">
-        <td></td>
-        <td class = "nav next"><input type = "submit" name = "next" value =
-        "<?php echo t('NEXT_STEP'); ?>" /></td> </tr> </table>
-        </fieldset> </form> </div> <?php
-break;
-
-case 2:
-    ?><h2><?php printf(t('JI_INSTALL') . ' - ' . t('STEP') .
-    ' %d ' . t('OUT_OF') . ' %d', 2, 4);
-    ?></h2> <div id = "install"> <form method="post"> <input type =
-        "hidden" name = "jirafeau" value =
-        "<?php echo JIRAFEAU_VERSION; ?>" /><input type = "hidden" name =
-        "step" value = "2" /><fieldset> <legend><?php
+        "step" value = "1" /><fieldset> <legend><?php
         echo t('ADMIN_PSW');
     ?></legend> <table> <tr> <td class = "info" colspan =
-        "2"><?php echo
-        t('Jirafeau has an administration interface (through admin.php). ' .
-        'You can set a password to access the interface or leave it empty ' .
-        'to disable the interface.');
+        "2"><?php echo t('ADMIN_INTERFACE_INFO');
     ?></td> </tr> <tr> <td class = "label"><label for = "select_password"
        ><?php echo t('ADMIN_PSW') . ':';
     ?></label></td>
@@ -248,19 +209,16 @@ case 2:
         </fieldset> </form> </div> <?php
 break;
 
-case 3:
+case 2:
     ?><h2><?php printf(t('JI_INSTALL') . ' - ' . t('STEP') .
-    ' %d ' . t('OUT_OF') . ' %d', 3, 4);
+    ' %d ' . t('OUT_OF') . ' %d', 2, 3);
     ?></h2> <div id = "install"> <form method="post"> <input type =
         "hidden" name = "jirafeau" value =
         "<?php echo JIRAFEAU_VERSION; ?>" /><input type = "hidden" name =
         "step" value =
-        "3" /><fieldset> <legend><?php echo t('INFO');
+        "2" /><fieldset> <legend><?php echo t('INFO');
     ?></legend> <table> <tr> <td class = "info" colspan =
-        "2"><?php echo
-        t('The base address of Jirafeau is the first part of the URL, until ' .
-         '(and including) the last slash. For example: ' .
-         '"http://www.example.com/". Do not forget the trailing slash!');
+        "2"><?php echo t('BASE_ADDR_INFO');
     ?></td> </tr> <tr> <td class = "label"><label for = "input_web_root"
        ><?php echo t('BASE_ADDR') . ':';
     ?></label></td>
@@ -271,10 +229,7 @@ case 3:
           '', $_SERVER['REQUEST_URI']) : $cfg['web_root']);
       ?>" size = "40" /></td>
         </tr> <tr> <td class = "info" colspan = "2"><?php
-        echo t('The data directory is where your files and information about' .
-        ' your files will be stored. You should put it outside your web ' .
-        'site, or at least restrict the access to this directory. Do not ' .
-        'forget the trailing slash!');
+        echo t('DATA_DIR_EXPLAINATION');
     ?></td> </tr> <tr> <td class = "label"><label for = "input_var_root"
        ><?php echo t('DATA_DIR') . ':';
     ?></label></td>
@@ -302,18 +257,16 @@ case 3:
         </form> </div> <?php
 break;
 
-case 4:
+case 3:
     ?><h2><?php printf(t('JI_INSTALL') . ' - ' . t('STEP') .
-    ' %d ' . t('OUT_OF') . ' %d', 4, 4);
+    ' %d ' . t('OUT_OF') . ' %d', 3, 3);
     ?></h2> <div id = "install"> <form method="post"> <input type =
         "hidden" name = "jirafeau" value =
         "<?php echo JIRAFEAU_VERSION; ?>" /><input type = "hidden" name =
         "step" value =
-        "4" /><fieldset> <legend><?php echo t('FINALIZATION');
+        "3" /><fieldset> <legend><?php echo t('FINALIZATION');
     ?></legend> <table> <tr> <td class = "info" colspan =
-        "2"><?php echo
-        t('Jirafeau is setting the website according to the configuration ' .
-           'you provided.');
+        "2"><?php echo t('SETTING_UP');
     ?></td> </tr> <tr> <td class = "nav previous"><input type =
         "submit" name = "previous" value =
         "
@@ -326,7 +279,7 @@ case 4:
     if ($err['has_error']) {
         echo '<div class="error"><p>'.$err['why'].'<br />'.NL; ?><form method="post"> <input type = "hidden" name = "jirafeau" value =
             "<?php echo JIRAFEAU_VERSION; ?>" /><input type = "hidden" name =
-            "step" value = "4" /><input type = "submit" name =
+            "step" value = "3" /><input type = "submit" name =
             "retry" value =
             "<?php echo t('RETRY_STEP'); ?>" /></form>
             <?php echo '</p></div>';

@@ -17,26 +17,6 @@
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-global $languages_list;
-$languages_list = array('auto' => 'Automatic',
-                         'de'   => 'Deutsch',
-                         'en'   => 'English',
-                         'el'   => 'Ελληνικά',
-                         'es'   => 'Español',
-                         'hu'   => 'Magyar',
-                         'fi'   => 'Suomi',
-                         'fr'   => 'Français',
-                         'it'   => 'Italiano',
-                         'nl'   => 'Nederlands',
-                         'pl'   => 'Polszczyzna',
-                         'pt'   => 'português',
-                         'pt_BR'   => 'português (Brasil)',
-                         'ro'   => 'Limba română',
-                         'ru'   => 'ру́сский',
-                         'sk'   => 'Slovenčina',
-                         'tr'   => 'Türkçe',
-                         'zh'   => '汉语');
-
 function t($string_id)
 {
     $r = t_in($string_id, t_select_lang());
