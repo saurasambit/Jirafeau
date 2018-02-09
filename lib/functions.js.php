@@ -26,6 +26,7 @@ require(JIRAFEAU_ROOT . 'lib/settings.php');
 require(JIRAFEAU_ROOT . 'lib/functions.php');
 require(JIRAFEAU_ROOT . 'lib/lang.php');
 ?>
+var web_root = "<?php echo $cfg['web_root']; ?>";
 
 function translate (expr)
 {
@@ -130,12 +131,13 @@ function show_link (reference, delete_code, crypt_key, date)
     if (!!document.getElementById('upload_finished_download_page'))
     {
         document.getElementById('upload_link').href = download_link_href;
+        document.getElementById('upload_link_text').innerHTML = web_root + download_link_href;
     }
 
     // Email link
     var filename = document.getElementById('file_select').files[0].name;
     var b = encodeURIComponent("Download file \"" + filename + "\":") + "%0D";
-    b += encodeURIComponent("<?php echo $cfg['web_root']; ?>" + download_link_href) + "%0D";
+    b += encodeURIComponent(web_root + download_link_href) + "%0D";
     if (false == isEmpty(date))
     {
         b += "%0D" + encodeURIComponent("This file will be available until " + date.format('YYYY-MM-DD hh:mm (GMT O)')) + "%0D";
@@ -145,6 +147,7 @@ function show_link (reference, delete_code, crypt_key, date)
     // Delete link
     var delete_link_href = 'f.php?h=' + reference + '&d=' + delete_code;
     document.getElementById('delete_link').href = delete_link_href;
+    document.getElementById('delete_link_text').innerHTML = web_root + delete_link_href;
 
     // Validity date
     if (isEmpty(date))
@@ -177,6 +180,7 @@ function show_link (reference, delete_code, crypt_key, date)
              type.indexOf("video") > -1)
          {
             document.getElementById('preview_link').href = preview_link_href;
+            document.getElementById('preview_link_text').innerHTML = web_root + preview_link_href;
             document.getElementById('upload_finished_preview').style.display = '';
          }
     }
@@ -188,6 +192,7 @@ function show_link (reference, delete_code, crypt_key, date)
         direct_download_link_href += '&k=' + crypt_key;
     }
     document.getElementById('direct_link').href = direct_download_link_href;
+    document.getElementById('direct_link_text').innerHTML = web_root + direct_download_link_href;
 
     // Hide preview and direct download link if password is set
     if (document.getElementById('input_key').value.length > 0)

@@ -99,6 +99,8 @@ else {
     <p>
         <a id="upload_link" href=""><?php echo t('Download page') ?></a>
         <a id="upload_link_email" href=""><img id="upload_image_email"/></a>
+    </p><p>
+        <code id=upload_link_text></code>
         <button id="upload_link_button">✂</button>
     </p>
     </div>
@@ -108,6 +110,8 @@ else {
     <div id="upload_finished_preview">
     <p>
         <a id="preview_link" href=""><?php echo t('View link') ?></a>
+    </p><p>
+        <code id=preview_link_text></code>
         <button id="preview_link_button">✂</button>
     </p>
     </div>
@@ -117,6 +121,8 @@ else {
     <div id="upload_direct_download">
     <p>
         <a id="direct_link" href=""><?php echo t('Direct download link') ?></a>
+    </p><p>
+        <code id=direct_link_text></code>
         <button id="direct_link_button">✂</button>
     </p>
     </div>
@@ -124,6 +130,8 @@ else {
     <div id="upload_delete">
     <p>
         <a id="delete_link" href=""><?php echo t('Delete link') ?></a>
+    </p><p>
+        <code id=delete_link_text></code>
         <button id="delete_link_button">✂</button>
     </p>
     </div>
