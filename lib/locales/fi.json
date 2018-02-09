@@ -34,7 +34,6 @@
     "INTERNAL_ERROR_DEL": "Sisäinen virhe ilmaantui tiedostoa luodessa.",
     "JI_PROJECT": "Jirafeau Projekti",
     "ADMIN_INTERFACE_INFO": "Jirafeaussa on ylläpitosivu (admin.php:n kautta). Voit antaa salanan ottaaksesi sen käyttöön tai jättää tyjäksi poistaaksesi sen käytöstä.",
-    "JI_HAZ_LANGAGES": "Jirafeau on monikielinen. Valitse haluamasi kieli tai käytä Automaattista tunnistusta (kieli valitaan käyttäjän selaimen kielen perusteella).",
     "JI_FONCTIONAL": "Giraffes on nyt toiminnassa",
     "SETTING_UP": "Jirafeau asentaa verkkosivua antamiesi asetusten mukaan.",
     "JI_WEB_RE": "Jirafeau, sinun tiedostosäilö",

@@ -34,7 +34,6 @@
     "INTERNAL_ERROR_DEL": "Interná chyba počas vytvárania súboru.",
     "JI_PROJECT": "Projekt Jirafeau",
     "ADMIN_INTERFACE_INFO": "Jirafeau má rozhranie pre správcu (admin.php). Môžete buď nastaviť heslo pre prístup k nemu, alebo ho nechať prázdne. Ak je prázdne, rozhranie pre správcu je vypnuté.",
-    "JI_HAZ_LANGAGES": "Aplikácia Jirafeau je preložená do viacerých jazykov. Vyberte si konkrétny jazyk alebo si zvoľte Automatický (jazykové nastavenie sa získa z používateľovho prehliadača).",
     "JI_FONCTIONAL": "Web Jirafeau je teraz plne funkčný",
     "SETTING_UP": "Jirafeau nastavuje web na základe informácií, ktoré ste poskytli.",
     "JI_WEB_RE": "Jirafeau, Vaše webové úložisko",

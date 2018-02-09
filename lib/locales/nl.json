@@ -34,7 +34,6 @@
     "INTERNAL_ERROR_DEL": "Interne fout tijdens aanmaken van bestand.",
     "JI_PROJECT": "Jirafeau Project",
     "ADMIN_INTERFACE_INFO": "Jirafeau heeft een beheerdersinterface (via admin.php). Je kan een wachtwoord instellen om de interface te gebruiken of deze leeg laten om de interface uit te schakelen.",
-    "JI_HAZ_LANGAGES": "Jirafeau is beschikbaar in verschillende talen. Selecteer een taal of kies Automatisch. Hierbij wordt de taal van de browser van de gebruiker gedetecteerd.",
     "JI_FONCTIONAL": "Jirafeau is nu volledig operationeel",
     "SETTING_UP": "Jirafeau toont de website volgens het aangeleverde configuratiebestand.",
     "JI_WEB_RE": "Jirafeau, jouw online bestandsopslag",

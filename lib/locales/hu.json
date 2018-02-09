@@ -34,7 +34,6 @@
     "INTERNAL_ERROR_DEL": "Belső hiba történt a készítéskor.",
     "JI_PROJECT": "Jirafeau Projekt",
     "ADMIN_INTERFACE_INFO": "A Jirafeau adminisztrálható (az admin.php felületen). Állíts be jelszót, hogy használhasd, vagy ha üresen hagyod, azzal letiltod az admin oldalt.",
-    "JI_HAZ_LANGAGES": "A Jirafeau többnyelvű. Válassz kedvedre, vagy használd az automatizmust, ami a böngésződ nyelve lesz.",
     "JI_FONCTIONAL": "A Jirafeau immár teljes pompájában működik",
     "SETTING_UP": "A Jirafeau a kért konfiguráció szerint állította be a webszájotot.",
     "JI_WEB_RE": "Jirafeau, a webes fájltárolód",

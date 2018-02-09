@@ -34,7 +34,6 @@
     "INTERNAL_ERROR_DEL": "Errore interno durante la creazione del file.",
     "JI_PROJECT": "Progetto Jirafeau",
     "ADMIN_INTERFACE_INFO": "Jirafeau ha una interfaccia di amministrazione (via  admin.php). E' possibile impostare una password per accedere all'interfaccia o lasciarla vuota per disabilitare l'interfaccia stessa.",
-    "JI_HAZ_LANGAGES": "Jirafeau è internazionalizzato. Scegliere una lingua specifica o scelta Automatica (la lingua è fornita dal browser dell'utente).",
     "JI_FONCTIONAL": "Ora Jirafeau è completamente operativo",
     "SETTING_UP": "Jirafeau sta configurando il sito web secondo la configurazione che avete fornito.",
     "JI_WEB_RE": "Jirafeau, il tuo archivio web di file",

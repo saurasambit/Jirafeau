@@ -34,7 +34,6 @@
     "INTERNAL_ERROR_DEL": "Eroare internă în timpul creării fişierului.", 
     "JI_PROJECT": "Jirafeau Proiect", 
     "ADMIN_INTERFACE_INFO": "Jirafeau are o interfaţă de administrare(prin admin.php). Poţi seta o parolă pentru accesarea interfeţei sau poţi lăsa parola blank pentru a dezactiva interfaţa.", 
-    "JI_HAZ_LANGAGES": "Jirafeu este multi-limbă. Alege o limbă sau Automatic(limba este preluată din browser).", 
     "JI_FONCTIONAL": "Jirafeau este complet operaţional", 
     "SETTING_UP": "Jirafeau setează site-ul în concordanţă cu configuraţia furnizată.", 
     "JI_WEB_RE": "Jirafeau, depozitul tău web de fişiere", 

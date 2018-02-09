@@ -36,7 +36,6 @@
     "INTERNAL_ERROR_DEL": "Interner Fehler während der Dateierstellung.",
     "JI_PROJECT": "Jirafeau Projekt",
     "ADMIN_INTERFACE_INFO": "Jirafeau hat eine Administrations-Oberfläche (durch admin.php). Sie können ein Kennwort zum Zugriff auf die Schnittstelle festlegen oder lassen Sie es leer, um die Schnittstelle zu deaktivieren.",
-    "JI_HAZ_LANGAGES": "Jirafeau ist internationalisiert. Wählen Sie eine bestimmte Sprache oder Automatik (die Sprache wird vom Browser des Benutzers bereitgestellt).",
     "JI_FONCTIONAL": "Jirafeau ist nun voll funktionsfähig",
     "SETTING_UP": "Jirafeau richtet die Webseite entsprechend der Konfiguration, die Sie angegeben haben, ein.",
     "JI_WEB_RE": "Jirafeau, Ihr Web-Datei-Speicher",
