@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+session_start();
 define('JIRAFEAU_ROOT', dirname(__FILE__) . '/');
 
 require(JIRAFEAU_ROOT . 'lib/settings.php');
@@ -51,9 +51,6 @@ if (php_sapi_name() == "cli") {
       require(JIRAFEAU_ROOT.'lib/template/footer.php');
       exit;
   }
-
-  /* Check session. */
-  session_start();
 
   /* Unlog if asked. */
   if (isset($_POST['action']) && (strcmp($_POST['action'], 'logout') == 0)) {

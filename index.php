@@ -18,6 +18,7 @@
  *  You should have received a copy of the GNU Affero General Public License
  *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+session_start();
 define('JIRAFEAU_ROOT', dirname(__FILE__) . '/');
 
 require(JIRAFEAU_ROOT . 'lib/settings.php');
@@ -38,8 +39,6 @@ require(JIRAFEAU_ROOT . 'lib/template/header.php');
 if (true === jirafeau_challenge_upload_ip($cfg['upload_ip'], get_ip_address($cfg))) {
     // Is an upload password required?
     if (jirafeau_has_upload_password($cfg)) {
-        session_start();
-
         // Logout action
         if (isset($_POST['action']) && (strcmp($_POST['action'], 'logout') == 0)) {
             session_unset();
