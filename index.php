@@ -277,7 +277,7 @@ else {
     document.getElementById('send').style.display = 'none';
     if (!check_html5_file_api ())
         document.getElementById('max_file_size').innerHTML = '<?php
-             echo t('You browser may not support HTML5 so the maximum file size is ') . jirafeau_get_max_upload_size();
+             echo t('NO_BROWSER_SUPPORT') . jirafeau_get_max_upload_size();
              ?>';
 
     addCopyListener('upload_link_button', 'upload_link');

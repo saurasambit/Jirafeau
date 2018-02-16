@@ -1,4 +1,5 @@
 {
+    "NO_BROWSER_SUPPORT": "You browser may not support HTML5, so the maximum file size is ",
     "PLURAL_ENDING": "s",
     "JI_WEB_RE":  "Jirafeau, your web file repository",
     "SEL_FILE": "Select a file",
