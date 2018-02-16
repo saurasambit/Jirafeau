@@ -413,3 +413,11 @@ The very first version of Jirafeau after the fork of Jyraphe.
 - More translations
 - Style fixes
 - Removed useless alias API support (some old toy)
+
+## Version 3.4.0
+
+- Add encryption support in bash script
+- Refactoring of lang system for simpler management
+- Removed installation step asking for language
+- Merged weblate contributions
+- Fixed some spelling issues
