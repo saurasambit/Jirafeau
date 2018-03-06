@@ -39,7 +39,7 @@ $link_name = $_GET['h'];
 
 if (!preg_match('/[0-9a-zA-Z_-]+$/', $link_name)) {
     require(JIRAFEAU_ROOT.'lib/template/header.php');
-    echo '<div class="error"><p>' . t('Sorry, the requested file is not found') . '</p></div>';
+    echo '<div class="error"><p>' . t('FILE_404') . '</p></div>';
     require(JIRAFEAU_ROOT.'lib/template/footer.php');
     exit;
 }
@@ -47,7 +47,7 @@ if (!preg_match('/[0-9a-zA-Z_-]+$/', $link_name)) {
 $link = jirafeau_get_link($link_name);
 if (count($link) == 0) {
     require(JIRAFEAU_ROOT.'lib/template/header.php');
-    echo '<div class="error"><p>' . t('Sorry, the requested file is not found') .
+    echo '<div class="error"><p>' . t('FILE_404') .
     '</p></div>';
     require(JIRAFEAU_ROOT.'lib/template/footer.php');
     exit;
@@ -77,7 +77,7 @@ $p = s2p($link['md5']);
 if (!file_exists(VAR_FILES . $p . $link['md5'])) {
     jirafeau_delete_link($link_name);
     require(JIRAFEAU_ROOT.'lib/template/header.php');
-    echo '<div class="error"><p>'.t('File not available.').
+    echo '<div class="error"><p>'.t('FILE_NOT_AVAIL').
     '</p></div>';
     require(JIRAFEAU_ROOT.'lib/template/footer.php');
     exit;
@@ -87,23 +87,23 @@ if (!empty($delete_code) && $delete_code == $link['link_code']) {
     require(JIRAFEAU_ROOT.'lib/template/header.php');
     if (isset($_POST['do_delete'])) {
         jirafeau_delete_link($link_name);
-        echo '<div class="message"><p>'.t('File has been deleted.').
+        echo '<div class="message"><p>'.t('FILE_DELETED').
             '</p></div>';
     } else { ?>
         <div>
         <form action="f.php" method="post" id="submit_delete_post" class="form login">
         <input type="hidden" name="do_delete" value=1/>
         <fieldset>
-             <legend> <?php echo t('Confirm deletion') ?> </legend>
+             <legend> <?php echo t('CONFIRM_DEL') ?> </legend>
              <table>
              <tr><td>
-             <?php echo t('You are about to delete') . ' "' . htmlspecialchars($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' ?>
+             <?php echo t('GONNA_DEL') . ' "' . htmlspecialchars($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' ?>
              </td></tr>
              <tr><td>
-                <?php echo t('By using our services, you accept our'). ' <a href="tos.php">' . t('Terms of Service') . '</a>.' ?>
+                <?php echo t('USING_SERIVCE'). ' <a href="tos.php">' . t('TOS') . '</a>.' ?>
              </td></tr>
              <tr><td>
-                <input type="submit" id="submit_delete"  value="<?php echo t('Delete'); ?>"
+                <input type="submit" id="submit_delete"  value="<?php echo t('DELETE'); ?>"
                 onclick="document.getElementById('submit_delete_post').action='<?php echo 'f.php?h=' . $link_name . '&amp;d=' . $delete_code . "';"; ?>
                 document.getElementById('submit_delete').submit ();"/>
              </td></tr>
@@ -118,8 +118,8 @@ if ($link['time'] != JIRAFEAU_INFINITY && time() > $link['time']) {
     jirafeau_delete_link($link_name);
     require(JIRAFEAU_ROOT.'lib/template/header.php');
     echo '<div class="error"><p>'.
-    t('The time limit of this file has expired.') . ' ' .
-    t('File has been deleted.') .
+    t('FILE_EXPIRED') . ' ' .
+    t('FILE_DELETED') .
     '</p></div>';
     require(JIRAFEAU_ROOT . 'lib/template/footer.php');
     exit;
@@ -127,7 +127,7 @@ if ($link['time'] != JIRAFEAU_INFINITY && time() > $link['time']) {
 
 if (empty($crypt_key) && $link['crypted']) {
     require(JIRAFEAU_ROOT.'lib/template/header.php');
-    echo '<div class="error"><p>' . t('Sorry, the requested file is not found') .
+    echo '<div class="error"><p>' . t('FILE_404') .
     '</p></div>';
     require(JIRAFEAU_ROOT.'lib/template/footer.php');
     exit;
@@ -141,20 +141,20 @@ if (!empty($link['key'])) {
              '<form action="f.php" method="post" id="submit_post" class="form login">'; ?>
              <input type = "hidden" name = "jirafeau" value = "<?php echo JIRAFEAU_VERSION ?>"/><?php
         echo '<fieldset>' .
-             '<legend>' . t('Password protection') .
+             '<legend>' . t('PSW_PROTEC') .
              '</legend><table><tr><td>' .
-             t('Give the password of this file') . ' : ' .
+             t('GIMME_PSW') . ' : ' .
              '<input type = "password" name = "key" />' .
              '</td></tr>' .
              '<tr><td>' .
-             t('By using our services, you accept our'). ' <a href="tos.php">' . t('Terms of Service') . '</a>.' .
+             t('USING_SERIVCE'). ' <a href="tos.php">' . t('TOS') . '</a>.' .
              '</td></tr>';
 
         if ($link['onetime'] == 'O') {
             echo '<tr><td id="self_destruct">' .
-                 t('Warning, this file will self-destruct after being read') .
+                 t('AUTO_DESTRUCT') .
                  '</td></tr>';
-        } ?><tr><td><input type="submit" id = "submit_download"  value="<?php echo t('Download'); ?>"
+        } ?><tr><td><input type="submit" id = "submit_download"  value="<?php echo t('DL'); ?>"
         onclick="document.getElementById('submit_post').action='<?php
         echo 'f.php?h=' . $link_name . '&amp;d=1';
         if (!empty($crypt_key)) {
@@ -162,7 +162,7 @@ if (!empty($link['key'])) {
         } ?>';
         document.getElementById('submit_download').submit ();"/><?php
         if ($cfg['preview'] && jirafeau_is_viewable($link['mime_type'])) {
-            ?><input type="submit" id = "submit_preview"  value="<?php echo t('Preview'); ?>"
+            ?><input type="submit" id = "submit_preview"  value="<?php echo t('PREVIEW'); ?>"
             onclick="document.getElementById('submit_post').action='<?php
             echo 'f.php?h=' . $link_name . '&amp;p=1';
             if (!empty($crypt_key)) {
@@ -180,7 +180,7 @@ if (!empty($link['key'])) {
         } else {
             sleep(2);
             require(JIRAFEAU_ROOT.'lib/template/header.php');
-            echo '<div class="error"><p>' . t('Access denied') .
+            echo '<div class="error"><p>' . t('ACCESS_KO') .
             '</p></div>';
             require(JIRAFEAU_ROOT.'lib/template/footer.php');
             exit;
@@ -195,18 +195,18 @@ if (!$password_challenged && !$do_download && !$do_preview) {
              <input type = "hidden" name = "jirafeau" value = "<?php echo JIRAFEAU_VERSION ?>"/><?php
         echo '<fieldset><legend>' . htmlspecialchars($link['file_name']) . '</legend><table>' .
              '<tr><td>' .
-             t('You are about to download') . ' "' . htmlspecialchars($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' .
+             t('NOW_DOWNLOADING') . ' "' . htmlspecialchars($link['file_name']) . '" (' . jirafeau_human_size($link['file_size']) . ').' .
              '</td></tr>' .
              '<tr><td>' .
-             t('By using our services, you accept our'). ' <a href="tos.php">' . t('Terms of Service') . '</a>.' .
+             t('USING_SERIVCE'). ' <a href="tos.php">' . t('TOS') . '</a>.' .
              '</td></tr>';
 
     if ($link['onetime'] == 'O') {
         echo '<tr><td id="self_destruct">' .
-                 t('Warning, this file will self-destruct after being read') .
+                 t('AUTO_DESTRUCT') .
                  '</td></tr>';
     } ?>
-        <tr><td><input type="submit" id = "submit_download"  value="<?php echo t('Download'); ?>"
+        <tr><td><input type="submit" id = "submit_download"  value="<?php echo t('DL'); ?>"
         onclick="document.getElementById('submit_post').action='<?php
         echo 'f.php?h=' . $link_name . '&amp;d=1';
     if (!empty($crypt_key)) {
@@ -215,7 +215,7 @@ if (!$password_challenged && !$do_download && !$do_preview) {
         document.getElementById('submit_post').submit ();"/><?php
 
         if ($cfg['preview'] && jirafeau_is_viewable($link['mime_type'])) {
-            ?><input type="submit" id = "submit_preview"  value="<?php echo t('Preview'); ?>"
+            ?><input type="submit" id = "submit_preview"  value="<?php echo t('PREVIEW'); ?>"
             onclick="document.getElementById('submit_post').action='<?php
         echo 'f.php?h=' . $link_name . '&amp;p=1';
             if (!empty($crypt_key)) {

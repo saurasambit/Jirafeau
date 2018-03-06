@@ -333,17 +333,35 @@ if [ "$1" == "send" ]; then
         fi
         cnt=$(( cnt + 1 ))
         done)
+    key_code=$(cnt=0; echo "$res" | while read l; do
+        if [[ "$cnt" == "2" ]]; then
+            echo "$l"
+        fi
+        cnt=$(( cnt + 1 ))
+        done)
 
     echo
     echo "Download page:"
-    echo "    ${url}${downloadpage}?h=$code"
+    if [[ $key_code ]]; then
+        echo "    ${url}${downloadpage}?h=$code&k=$key_code"
+    else
+        echo "    ${url}${downloadpage}?h=$code"
+    fi
     echo "Direct download:"
-    echo "    ${url}${downloadpage}?h=$code&d=1"
+    if [[ $key_code ]]; then
+        echo "    ${url}${downloadpage}?h=$code&k=$key_code&d=1"
+    else
+        echo "    ${url}${downloadpage}?h=$code&d=1"
+    fi
     echo "Delete link:"
     echo "    ${url}${downloadpage}?h=$code&d=$del_code"
     echo
     echo "Download via API:"
-    echo "    ${0} get ${url}${apipage}?h=$code [PASSWORD}"
+    if [[ $key_code ]]; then
+        echo "    ${0} get ${url}${apipage}?h=$code&k=$key_code [PASSWORD}"
+    else
+        echo "    ${0} get ${url}${apipage}?h=$code [PASSWORD}"
+    fi
     echo "Delete via API:"
     echo "    ${0} delete ${url}${downloadpage}?h=$code&d=$del_code"
 

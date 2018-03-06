@@ -32,7 +32,6 @@ if (is_readable(JIRAFEAU_ROOT . 'lib/tos.local.txt')) {
 // Replace markers and print ToS
 require(JIRAFEAU_ROOT . 'lib/template/header.php');
 
-echo '<h2>Terms of Service</h2>';
 echo '<div>' . jirafeau_replace_markers($content, true) . '</div>';
 
 require(JIRAFEAU_ROOT . 'lib/template/footer.php');

@@ -26,13 +26,23 @@ require(JIRAFEAU_ROOT . 'lib/settings.php');
 require(JIRAFEAU_ROOT . 'lib/functions.php');
 require(JIRAFEAU_ROOT . 'lib/lang.php');
 ?>
+var web_root = "<?php echo $cfg['web_root']; ?>";
 
-function translate (expr)
-{
-    var lang_array = <?php echo json_lang_generator() ?>;
-    if (lang_array.hasOwnProperty(expr))
-        return lang_array[expr];
-    return expr;
+var lang_array = <?php echo json_lang_generator(null); ?>;
+var lang_array_fallback = <?php echo json_lang_generator("en"); ?>;
+
+function translate (expr) {
+    if (lang_array.hasOwnProperty(expr)) {
+        var e = lang_array[expr];
+        if (!isEmpty(e))
+            return e;
+    }
+    if (lang_array_fallback.hasOwnProperty(expr)) {
+        var e = lang_array_fallback[expr];
+        if (!isEmpty(e))
+            return e;
+    }
+    return "FIXME: " + expr;
 }
 
 function isEmpty(str) {
@@ -119,7 +129,7 @@ function show_link (reference, delete_code, crypt_key, date)
     document.getElementById('uploading').style.display = 'none';
     document.getElementById('upload').style.display = 'none';
     document.getElementById('upload_finished').style.display = '';
-    document.title = 'Jirafeau - 100%';
+    document.title = "100% - <?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?>";
 
     // Download page
     var download_link_href = 'f.php?h=' + reference;
@@ -130,12 +140,13 @@ function show_link (reference, delete_code, crypt_key, date)
     if (!!document.getElementById('upload_finished_download_page'))
     {
         document.getElementById('upload_link').href = download_link_href;
+        document.getElementById('upload_link_text').innerHTML = web_root + download_link_href;
     }
 
     // Email link
     var filename = document.getElementById('file_select').files[0].name;
     var b = encodeURIComponent("Download file \"" + filename + "\":") + "%0D";
-    b += encodeURIComponent("<?php echo $cfg['web_root']; ?>" + download_link_href) + "%0D";
+    b += encodeURIComponent(web_root + download_link_href) + "%0D";
     if (false == isEmpty(date))
     {
         b += "%0D" + encodeURIComponent("This file will be available until " + date.format('YYYY-MM-DD hh:mm (GMT O)')) + "%0D";
@@ -145,6 +156,7 @@ function show_link (reference, delete_code, crypt_key, date)
     // Delete link
     var delete_link_href = 'f.php?h=' + reference + '&d=' + delete_code;
     document.getElementById('delete_link').href = delete_link_href;
+    document.getElementById('delete_link_text').innerHTML = web_root + delete_link_href;
 
     // Validity date
     if (isEmpty(date))
@@ -177,6 +189,7 @@ function show_link (reference, delete_code, crypt_key, date)
              type.indexOf("video") > -1)
          {
             document.getElementById('preview_link').href = preview_link_href;
+            document.getElementById('preview_link_text').innerHTML = web_root + preview_link_href;
             document.getElementById('upload_finished_preview').style.display = '';
          }
     }
@@ -188,6 +201,7 @@ function show_link (reference, delete_code, crypt_key, date)
         direct_download_link_href += '&k=' + crypt_key;
     }
     document.getElementById('direct_link').href = direct_download_link_href;
+    document.getElementById('direct_link_text').innerHTML = web_root + direct_download_link_href;
 
     // Hide preview and direct download link if password is set
     if (document.getElementById('input_key').value.length > 0)
@@ -203,7 +217,7 @@ function show_upload_progression (percentage, speed, time_left)
     document.getElementById('uploaded_percentage').innerHTML = percentage;
     document.getElementById('uploaded_speed').innerHTML = speed;
     document.getElementById('uploaded_time').innerHTML = time_left;
-    document.title = 'Jirafeau - ' + percentage;
+    document.title = percentage + " - <?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?>";
 }
 
 function hide_upload_progression ()
@@ -211,7 +225,7 @@ function hide_upload_progression ()
     document.getElementById('uploaded_percentage').style.display = 'none';
     document.getElementById('uploaded_speed').style.display = 'none';
     document.getElementById('uploaded_time').style.display = 'none';
-    document.title = 'Jirafeau';
+    document.title = "<?php echo empty($cfg['title']) ? 'Jirafeau' : $cfg['title']; ?>";
 }
 
 function upload_progress (e)
@@ -607,17 +621,17 @@ function upload_time_estimation_speed_string()
     if (s <= 1000)
     {
         res = s.toString();
-        scale = "o/s";
+        scale = "Bit/s";
     }
     else if (s < 1000000)
     {
         res = Math.floor(s/100) / 10;
-        scale = "Ko/s";
+        scale = "KBit/s";
     }
     else
     {
         res = Math.floor(s/100000) / 10;
-        scale = "Mo/s";
+        scale = "Mbit/s";
     }
     if (res == 0)
         return '';
@@ -627,31 +641,31 @@ function upload_time_estimation_speed_string()
 function milliseconds_to_time_string (milliseconds)
 {
     function numberEnding (number) {
-        return (number > 1) ? 's' : '';
+        return (number > 1) ? translate ('PLURAL_ENDING') : '';
     }
 
     var temp = Math.floor(milliseconds / 1000);
     var years = Math.floor(temp / 31536000);
     if (years) {
-        return years + ' ' + translate ('year') + numberEnding(years);
+        return years + ' ' + translate ('YEAR') + numberEnding(years);
     }
     var days = Math.floor((temp %= 31536000) / 86400);
     if (days) {
-        return days + ' ' + translate ('day') + numberEnding(days);
+        return days + ' ' + translate ('DAY') + numberEnding(days);
     }
     var hours = Math.floor((temp %= 86400) / 3600);
     if (hours) {
-        return hours + ' ' + translate ('hour') + numberEnding(hours);
+        return hours + ' ' + translate ('HOUR') + numberEnding(hours);
     }
     var minutes = Math.floor((temp %= 3600) / 60);
     if (minutes) {
-        return minutes + ' ' + translate ('minute') + numberEnding(minutes);
+        return minutes + ' ' + translate ('MINUTE') + numberEnding(minutes);
     }
     var seconds = temp % 60;
     if (seconds) {
-        return seconds + ' ' + translate ('second') + numberEnding(seconds);
+        return seconds + ' ' + translate ('SECOND') + numberEnding(seconds);
     }
-    return translate ('less than a second');
+    return translate ('LESS_1_SEC');
 }
 
 function upload_time_estimation_time()

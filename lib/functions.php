@@ -374,7 +374,7 @@ function jirafeau_upload($file, $one_time_download, $key, $time, $ip, $crypt, $l
         return (array(
                  'error' =>
                    array('has_error' => true,
-                          'why' => t('Internal error during file creation.')),
+                          'why' => t('INTERNAL_ERROR_DEL')),
                  'link' =>'',
                  'delete_link' => ''));
     }
@@ -513,7 +513,7 @@ function check_errors($cfg)
     }
 
     if (!is_writable(VAR_ASYNC)) {
-        add_error(t('The async directory is not writable!'), VAR_ASYNC);
+        add_error(t('ASYNC_DIR_W'), VAR_ASYNC);
     }
 }
 
@@ -556,28 +556,28 @@ function jirafeau_admin_list($name, $file_hash, $link_hash)
 {
     echo '<fieldset><legend>';
     if (!empty($name)) {
-        echo t('Filename') . ": $name ";
+        echo t('FILENAME') . ": $name ";
     }
     if (!empty($file_hash)) {
-        echo t('file') . ": $file_hash ";
+        echo t('FILE') . ": $file_hash ";
     }
     if (!empty($link_hash)) {
-        echo t('link') . ": $link_hash ";
+        echo t('LINK') . ": $link_hash ";
     }
     if (empty($name) && empty($file_hash) && empty($link_hash)) {
-        echo t('List all files');
+        echo t('LS_FILES');
     }
     echo '</legend>';
     echo '<table>';
     echo '<tr>';
-    echo '<td>' . t('Filename') . '</td>';
-    echo '<td>' . t('Type') . '</td>';
-    echo '<td>' . t('Size') . '</td>';
-    echo '<td>' . t('Expire') . '</td>';
-    echo '<td>' . t('Onetime') . '</td>';
-    echo '<td>' . t('Upload date') . '</td>';
-    echo '<td>' . t('Origin') . '</td>';
-    echo '<td>' . t('Action') . '</td>';
+    echo '<td>' . t('FILENAME') . '</td>';
+    echo '<td>' . t('TYPE') . '</td>';
+    echo '<td>' . t('SIZE') . '</td>';
+    echo '<td>' . t('EXPIRE') . '</td>';
+    echo '<td>' . t('ONETIME') . '</td>';
+    echo '<td>' . t('UPLOAD_DATE') . '</td>';
+    echo '<td>' . t('ORIGIN') . '</td>';
+    echo '<td>' . t('ACTION') . '</td>';
     echo '</tr>';
 
     /* Get all links files. */
@@ -613,7 +613,7 @@ function jirafeau_admin_list($name, $file_hash, $link_hash)
                 echo '<tr>';
                 echo '<td>' .
                 '<strong><a id="upload_link" href="f.php?h='. htmlspecialchars($node) .'" title="' .
-                    t('Download page') . '">' . htmlspecialchars($l['file_name']) . '</a></strong>';
+                    t('DL_PAGE') . '">' . htmlspecialchars($l['file_name']) . '</a></strong>';
                 echo '</td>';
                 echo '<td>' . $l['mime_type'] . '</td>';
                 echo '<td>' . jirafeau_human_size($l['file_size']) . '</td>';
@@ -631,17 +631,17 @@ function jirafeau_admin_list($name, $file_hash, $link_hash)
                 '<form method="post">' .
                 '<input type = "hidden" name = "action" value = "download"/>' .
                 '<input type = "hidden" name = "link" value = "' . $node . '"/>' .
-                '<input type = "submit" value = "' . t('Download') . '" />' .
+                '<input type = "submit" value = "' . t('DL') . '" />' .
                 '</form>' .
                 '<form method="post">' .
                 '<input type = "hidden" name = "action" value = "delete_link"/>' .
                 '<input type = "hidden" name = "link" value = "' . $node . '"/>' .
-                '<input type = "submit" value = "' . t('Del link') . '" />' .
+                '<input type = "submit" value = "' . t('DEL_LINK') . '" />' .
                 '</form>' .
                 '<form method="post">' .
                 '<input type = "hidden" name = "action" value = "delete_file"/>' .
                 '<input type = "hidden" name = "md5" value = "' . $l['md5'] . '"/>' .
-                '<input type = "submit" value = "' . t('Del file and links') . '" />' .
+                '<input type = "submit" value = "' . t('DEL_FILE_LINKS') . '" />' .
                 '</form>' .
                 '</td>';
                 echo '</tr>';
