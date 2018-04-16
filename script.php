@@ -353,6 +353,12 @@ if [ "$1" == "send" ]; then
     else
         echo "    ${url}${downloadpage}?h=$code&d=1"
     fi
+    echo "View download:"
+    if [[ $key_code ]]; then
+        echo "    ${url}${downloadpage}?h=$code&k=$key_code&p=1"
+    else
+        echo "    ${url}${downloadpage}?h=$code&d=1"
+    fi
     echo "Delete link:"
     echo "    ${url}${downloadpage}?h=$code&d=$del_code"
     echo
