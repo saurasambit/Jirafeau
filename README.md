@@ -1,7 +1,7 @@
 # Jirafeau
 
 This repo exists purely to maintain this commit, which allows previewing of files uploaded via API https://github.com/SecretlyTaco/Jirafeau/commit/762a73c4096af93ef65726033e86ada353d8397d
-You can try a hosted version of this repo at https://memeimg.sockspls.com/
+You can try a hosted version of this repo at https://i.sockspls.com/
 
 ---
 
